@@ -1,1 +1,1 @@
-# This is the director for meeting notes
+# This is the directory for meeting notes
