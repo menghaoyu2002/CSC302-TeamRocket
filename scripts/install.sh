@@ -109,7 +109,7 @@ install() {
   elif [[ "$OS" == "Fedora" ]]; then
     REPO_LINK="https://download.docker.com/linux/fedora/docker-ce.repo"
     install
-  elif [[ "$OS" == "CentOS"]]; then 
+  elif [[ "$OS" == "CentOS" ]]; then 
     REPO_LINK="https://download.docker.com/linux/centos/docker-ce.repo"
     install
   else 
@@ -139,6 +139,3 @@ install() {
 
   echo 'docker has been installed.'
 ) 2>&1 | tee -a install_logs.txt
-
-
-
