@@ -84,23 +84,13 @@ install() {
     REPO_LINK="https://download.docker.com/linux/debian"
     install
   else 
-      
       echo 'Your version of linux is not yet supported.'
       echo 'Please manually install docker from https://docs.docker.com/desktop/install/linux-install/' 
       exit 1
   fi
 
-  echo -e 'docker install complete!\n\n'
-
-  echo 'starting docker....'
-  if ! systemctl --user start docker-desktop; then
-    echo 'failure to start docker.'
-    echo 'Please report the issue to https://github.com/menghaoyu2002/CSC302-TeamRocket/issues with the logs file ./install_logs.txt attached'
-    exit 1
-  fi
-  echo 'docker started!'
-
-  echo 'install complete.'
+  echo 'docker install complete!'
+  echo 'all dependencies have been installed.'
 ) 2>&1 | tee -a install_logs.txt
 
 
