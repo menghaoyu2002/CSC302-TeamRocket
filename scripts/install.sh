@@ -29,17 +29,6 @@ apt_install () {
     echo 'Please report the issue to https://github.com/menghaoyu2002/CSC302-TeamRocket/issues with the logs file ./install_logs.txt attached'
     exit 1
   }
-
-  echo 'installing docker desktop'
-  {
-    curl --create-dirs -O --output-dir ./tmp https://desktop.docker.com/linux/main/amd64/docker-desktop-4.12.0-amd64.deb
-    apt-get install ./tmp/docker-desktop-4.12.0-amd64.deb
-    rm -rf ./tmp
-  } || {
-    echo 'docker desktop could not be installed.'
-    echo 'Please report the issue to https://github.com/menghaoyu2002/CSC302-TeamRocket/issues with the logs file ./install_logs.txt attached'
-    exit 1
-  }
 }
 
 # install docker
