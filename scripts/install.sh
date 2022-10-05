@@ -10,8 +10,8 @@ apt_install () {
   apt-get update
 
   echo 'installing docker dependencies...'
-
-	if ! apt-get install ca-certificates curl gnupg lsb-release; then
+  
+  if ! apt-get install ca-certificates curl gnupg lsb-release; then
     echo 'docker dependencies could not be installed.'
     echo_report_error_message
   fi 
