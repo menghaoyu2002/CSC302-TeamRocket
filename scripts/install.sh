@@ -1,5 +1,10 @@
 #!/bin/bash 
 
+echo_report_error_message() {
+    echo 'Please report the issue to https://github.com/menghaoyu2002/CSC302-TeamRocket/issues with the logs file ./install_logs.txt attached'
+    exit 1
+}
+
 apt_install () {
   echo 'running apt-get update...'
   apt-get update
@@ -8,8 +13,7 @@ apt_install () {
 
 	if ! apt-get install ca-certificates curl gnupg lsb-release; then
     echo 'docker dependencies could not be installed.'
-    echo 'Please report the issue to https://github.com/menghaoyu2002/CSC302-TeamRocket/issues with the logs file ./install_logs.txt attached'
-    exit 1
+    echo_report_error_message
   fi 
 
   echo 'installing docker engine'
@@ -26,8 +30,7 @@ apt_install () {
     apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
   } || {
     echo 'docker engine could not be installed.'
-    echo 'Please report the issue to https://github.com/menghaoyu2002/CSC302-TeamRocket/issues with the logs file ./install_logs.txt attached'
-    exit 1
+    echo_report_error_message
   }
 }
 
@@ -72,6 +75,8 @@ install() {
     GPG_LINK="https://download.docker.com/linux/debian/gpg"
     REPO_LINK="https://download.docker.com/linux/debian"
     install
+  elif [[ "$OS" == "Fedora" ]]; then
+    REPO_LINK="https://download.docker.com/linux/fedora/docker-ce.repo"
   else 
       echo 'Your version of linux is not yet supported.'
       echo 'Please manually install docker from https://docs.docker.com/desktop/install/linux-install/' 
@@ -79,7 +84,24 @@ install() {
   fi
 
   echo 'docker install complete!'
-  echo 'all dependencies have been installed.'
+
+  echo 'starting docker...'
+  {
+    systemctl start docker
+  } || {
+    echo 'Docker could not be started.'
+    echo_report_error_message
+  }
+
+  echo 'verifying docker installation...' 
+  {
+    docker run hello-world
+  } || {
+    echo 'Docker installation was unsucessful.'
+    echo_report_error_message
+  }
+
+  echo 'docker has been installed.'
 ) 2>&1 | tee -a install_logs.txt
 
 
