@@ -34,17 +34,44 @@ apt_install () {
   }
 }
 
+dnf_install() {
+  echo 'installing docker engine'
+  {
+    dnf -y install dnf-plugins-core
+    dnf config-manager --add-repo $REPO_LINK
+    dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin 
+  } || {
+    echo 'docker engine could not be installed'
+    echo_report_error_message
+  }
+}
+
+yum_install() {
+  echo 'installing docker engine'
+  {
+    yum install -y yum-utils
+    yum-config-manager --add-repo $REPO_LINK
+    yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  } || {
+    echo 'docker engine could not be installed'
+    echo_report_error_message
+  }
+}
+
 # install docker
 install() {
   if command -v apt >/dev/null; then
     echo 'installing dependencies with apt'
     apt_install
   elif command -v dnf >/dev/null; then
-    echo 'installing dependencies with yum'
+    echo 'installing dependencies with dnf'
     dnf_install
+  elif command -v yum >/dev/null; then
+    echo 'installing dependencies with yum'
+    yum_install
   else
-    echo 'The only package managers currently supported are apt and dnf'
-    echo 'Please request support for your package at https://github.com/menghaoyu2002/CSC302-TeamRocket/issues'
+    echo 'The only package managers currently supported are apt, dnf, and yum.'
+    echo 'Please request support for your package manager at https://github.com/menghaoyu2002/CSC302-TeamRocket/issues'
     exit 1
   fi
 }
@@ -62,8 +89,12 @@ install() {
       OS=$DISTRIB_ID
   elif [ -f /etc/debian_version ]; then
       OS=Debian
+  else
+    echo 'Your version of linux could not be identified'
+    echo_report_error_message
   fi
 
+  # truncate the OS to the first word
   OS=$(echo $OS | awk '{print $1;}')
 
   # handle which download urls to use based on distro
@@ -77,6 +108,10 @@ install() {
     install
   elif [[ "$OS" == "Fedora" ]]; then
     REPO_LINK="https://download.docker.com/linux/fedora/docker-ce.repo"
+    install
+  elif [[ "$OS" == "CentOS"]]; then 
+    REPO_LINK="https://download.docker.com/linux/centos/docker-ce.repo"
+    install
   else 
       echo 'Your version of linux is not yet supported.'
       echo 'Please manually install docker from https://docs.docker.com/desktop/install/linux-install/' 
@@ -92,6 +127,7 @@ install() {
     echo 'Docker could not be started.'
     echo_report_error_message
   }
+  echo 'docker has been started.'
 
   echo 'verifying docker installation...' 
   {
