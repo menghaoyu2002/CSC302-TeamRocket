@@ -114,7 +114,7 @@ install() {
     install
   else 
       echo 'Your version of linux is not yet supported.'
-      echo 'Please manually install docker from https://docs.docker.com/desktop/install/linux-install/' 
+      echo 'Please manually install docker from https://docs.docker.com/engine/install/' 
       exit 1
   fi
 
