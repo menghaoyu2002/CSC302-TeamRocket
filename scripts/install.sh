@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/sh
 
 echo_report_error_message() {
     echo 'Please report the issue to https://github.com/menghaoyu2002/CSC302-TeamRocket/issues with the logs file ./scripts/install_logs.txt attached'

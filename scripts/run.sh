@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo 'starting the application...'
 {
 	docker run --rm --name team_rocket_app team_rocket_app
