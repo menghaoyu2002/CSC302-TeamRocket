@@ -98,18 +98,18 @@ install() {
   OS=$(echo $OS | awk '{print $1;}')
 
   # handle which download urls to use based on distro
-  if [[ "$OS" == "Ubuntu" ]]; then
+  if [ "$OS" = "Ubuntu" ]; then
     GPG_LINK="https://download.docker.com/linux/ubuntu/gpg"
     REPO_LINK="https://download.docker.com/linux/ubuntu"
     install
-  elif [[ "$OS" == "Debian" ]]; then 
+  elif [ "$OS" = "Debian" ]; then 
     GPG_LINK="https://download.docker.com/linux/debian/gpg"
     REPO_LINK="https://download.docker.com/linux/debian"
     install
-  elif [[ "$OS" == "Fedora" ]]; then
+  elif [ "$OS" = "Fedora" ]; then
     REPO_LINK="https://download.docker.com/linux/fedora/docker-ce.repo"
     install
-  elif [[ "$OS" == "CentOS" ]]; then 
+  elif [ "$OS" = "CentOS" ]; then 
     REPO_LINK="https://download.docker.com/linux/centos/docker-ce.repo"
     install
   else 
