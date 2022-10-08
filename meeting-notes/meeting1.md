@@ -47,22 +47,17 @@ The team met on October 3rd to discuss the following:
 
   - Two options
 
-    - 1\. A cli app that can display graphs and visualize data
+     1\. A cli app that can display graphs and visualize data when required.
 
-      > when required.
+       \$ tool -display from jan 1 feb 2 -\> shows graph/data
+       \> in browser
 
-      - \$ tool -display from jan 1 feb 2 -\> shows graph/data
-        \> in browser
+     2\. A web application that is interactable, this will be the main interface that the user interacts with. This abstracts away the need to use cli flags and pass
+    arguments.
 
-    - 2\. A web application that is interactable, this will be the
-
-      > main interface that the user interacts with. This
-      > abstracts away the need to use cli flags and pass
-      > arguments.
-
-      - We chose the web application because of its ease of use.
-        \> It abstracts many of the details away, with buttons
-        \> and visual interfaces.
+       We chose the web application because of its ease of use.
+       It abstracts many of the details away, with buttons
+       and visual interfaces.
 
 # Reasons why we chose our tech stack
 
@@ -156,79 +151,47 @@ The team met on October 3rd to discuss the following:
 
   - Docker commonly used
 
-  - We will use docker because it will simply some assumptions we
+  - We will use docker because it will simply some assumptions we need to make about the user's machine
 
-    > need to make about the user's machine
+   - We don't need to assume it has ANY of our dependencies on it except docker
 
-    - We don't need to assume it has ANY of our dependencies on it
+    - Instead, we will make all our assumptions about the docker container instead
 
-      > except docker
+    - What this means is, although we can't assume that python isinstalled on the user's machine, we can and will assume that python will be installed in our container.
 
-    - Instead, we will make all our assumptions about the docker
+    - Since we get to choose which OS our docker image uses, we do not need to worry about what package manager is installed on the user's machine
 
-      > container instead
+     - We  _know_ exactly what package manager is installed on our docker image
 
-    - What this means is, although we can't assume that python is
+  - We also considered using make to allow the user to run the build, test, run commands via make.
 
-      > installed on the user's machine, we can and will assume
-      > that python will be installed in our container.
+   - After some consideration, it seems like make will just be another dependency that we do not know is on the user's machine or not
 
-    - Since we get to choose which OS our docker image uses, we do
+    - If it isn't we would have to install it
 
-      > not need to worry about what package manager is installed
-      > on the user's machine
+    - How do we install it?
 
-      - We \# _know_ \*exactly what package manager is installed
-        \> on our docker image\*
-
-  - We also considered using make to allow the user to run the
-
-    > build, test, run commands via make.
-
-    - After some consideration, it seems like make will just be
-
-      > another dependency that we do not know is on the user's
-      > machine or not
-
-      - If it isn't we would have to install it
-
-      - How do we install it?
-
-        - We could automate this but we would need to know \>
+     - We could automate this but we would need to know
           what the package manager is on the user's machine
 
     - Instead, we will just settle and use bash scripts instead.
 
-      - Although bash scripts don't track dependencies and
+     - Although bash scripts don't track dependencies and therefore can be run unnecessarily, this trade off seemed okay (why?)
 
-        > therefore can be run unnecessarily, this trade off
-        > seemed okay (why?)
+     - We are using python, which is not a compiled language. This means we do not need to compile anything with make, and thus the dependency management is redundant to us.
 
-        - We are using python, which is not a compiled
+     - Although the build script may build an identical docker image at times, this is a tradeoff we are willing to make.
 
-          > language. This means we do not need to compile
-          > anything with make, and thus the dependency
-          > management is redundant to us.
+     - This does not cause anything to break
 
-        - Although the build script may build an identical
+     - However, it does cause time and resources to be wasted building a duplicate image.
 
-          > docker image at times, this is a tradeoff we are
-          > willing to make.
+     - Docker does cache builds (i think).
 
-          - This does not cause anything to break
+     - This might be an issue we need to address in the future if it's a big enough problem.
 
-          - However, it does cause time and resources to be
-
-            > wasted building a duplicate image.
-
-          - Docker does cache builds (i think).
-
-          - This might be an issue we need to address in the
-
-            > future if it's a big enough problem.
-
-            - It is always easy to convert back to make \>
-              files when we already have bash scripts \>
+     - It is always easy to convert back to make
+              files when we already have bash scripts
               that build, test, and run.
 
 - Why SQLite?
@@ -252,45 +215,40 @@ The team met on October 3rd to discuss the following:
 
   - 3 big choices: React, Angular, Vue
 
-    - All do the same thing, not super different from each other.
+   - All do the same thing, not super different from each other.
 
   - For our purpose, Angular might have too much overhead.
 
-    - Our scope is smaller, no need to use a full on framework!
+   - Our scope is smaller, no need to use a full on framework!
 
   - Which one has the best support for visualization data?
 
-    - Do we even need to use a front end framework?
+   - Do we even need to use a front end framework?
 
     - Which one has the best support for displaying graphs?
 
-      - React
+     - React
 
-        - [[https://canvasjs.com/react-charts/]{.underline}](https://canvasjs.com/react-charts/)
+     - [[https://canvasjs.com/react-charts/]{.underline}](https://canvasjs.com/react-charts/)
 
-        - [[https://github.com/recharts/recharts]{.underline}](https://github.com/recharts/recharts)
+     - [[https://github.com/recharts/recharts]{.underline}](https://github.com/recharts/recharts)
 
-        - [[https://uber.github.io/react-vis/]{.underline}](https://uber.github.io/react-vis/)
-          \> (deprecated)
+     - [[https://uber.github.io/react-vis/]{.underline}](https://uber.github.io/react-vis/) (deprecated)
 
-      - Vue
+     - Vue
 
-        - [[https://vue-chartjs.org/guide]{.underline}](https://vue-chartjs.org/guide)
+     - [[https://vue-chartjs.org/guide]{.underline}](https://vue-chartjs.org/guide)
 
     - Maybe We don't even need a frontend framework?
 
-      - Python can display graphs with this! \>
+     - Python can display graphs with this!
         [[https://plotly.com/]{.underline}](https://plotly.com/)
 
   - Pytest will be used for testing
 
-    - All testing will be done with Pytest because all unit
+   - All testing will be done with Pytest because all unit testing frameworks are more or less the same. Our team is most familiar with pytest.
 
-      > testing frameworks are more or less the same. Our team is
-      > most familiar with pytest.
-
-    - It is a unit testing framework. We do not necessarily have
-      \> to do automation tests/end to end just yet.
+   - It is a unit testing framework. We do not necessarily have to do automation tests/end to end just yet.
 
 # Immediate Next steps
 
@@ -298,22 +256,16 @@ The team met on October 3rd to discuss the following:
 
   - Connect an empty sqlite db to our python backend (Jeremiah)
 
-    - Print('Yay sqlite has been connected')
+   - Print('Yay sqlite has been connected')
 
-  - Create test files that simply print "tests are running" \*\*for
+  - Create test files that simply print "tests are running" \*\*for now (Michael)\*\*
 
-    > now (Michael)\*\*
+  - Create a command line script that can run _all_ our tests. (Menghao)
 
-  - Create a command line script that can run _all_ our tests.
+  - Create command line script that can build our application (Menghao)
 
-    > (Menghao)
-
-  - Create command line script that can build our application
-
-    > (Menghao)
-
-    - That is, it will create a container that has a running \>
+   - That is, it will create a container that has a running
       instance of our python application within it.
 
-  - Create a documentation/wiki page that tells the user how to \>
+  - Create a documentation/wiki page that tells the user how to
     build, run, and test our application. (Everyone)
