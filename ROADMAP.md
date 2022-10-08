@@ -1,12 +1,12 @@
 # Road Map
 
 ## What
-We want to build an application/tool that can import a dataset, store the relevant information in a database, then dispay the data to the user. We will accomplish this in 3 milestones:  
+We want to build an web application that can import a dataset, store the relevant information in a database, then dispay the data to the user. We will accomplish this in 3 milestones:  
 
 1. Set up repository, dev environments, and initial files. Project can build, run and connect to the database. (complete)
 2. Able to import data into the database on server and get data with a basic interface. (~2 weeks)
-3. Able to perform transformations/calculations on the data and display it with a simple web-page. (~3 weeks)
-4. Make the web-page interactive. (~2 weeks)
+3. Able to perform transformations/calculations on the data and display them upon user request with a simple web-page. (~3 weeks)
+4. Make the web-page interactive, allowing the user to see data transformations as they adjust values on the page. (~2 weeks)
 
 ## How
 For milestone 1, we had:
