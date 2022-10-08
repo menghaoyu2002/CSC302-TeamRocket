@@ -76,9 +76,7 @@ The team met on October 3rd to discuss the following:
 
 - Python is very easy to work with data
 
-- Many Python libraries are focused on data analysis and
-
-  > transformation
+- Many Python libraries are focused on data analysis andtransformation
 
 - https://github.com/simonw/datasette built with python + sqlite
 
@@ -131,9 +129,7 @@ The team met on October 3rd to discuss the following:
 
 - What to build
 
-  - Import dataset, convert to sqlite, display with interactive
-
-    > webpage
+  - Import dataset, convert to sqlite, display with interactive webpage
 
   - Milestones
 
@@ -196,14 +192,9 @@ The team met on October 3rd to discuss the following:
 
 - Why SQLite?
 
-  - Small, very easy to set up, has built in integration with
+  - Small, very easy to set up, has built in integration with python.
 
-    > python.
-
-  - Local! If someone else changes their database, we should not
-
-    > need to update any others! Databases are local and do not need
-    > to be synchronized
+  - Local! If someone else changes their database, we should not need to update any others! Databases are local and do not need to be synchronized
 
   - Can store lots of data if needed.
 
