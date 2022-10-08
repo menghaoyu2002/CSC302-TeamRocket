@@ -76,7 +76,7 @@ The team met on October 3rd to discuss the following:
 
 - Python is very easy to work with data
 
-- Many Python libraries are focused on data analysis andtransformation
+- Many Python libraries are focused on data analysis and transformation
 
 - https://github.com/simonw/datasette built with python + sqlite
 
