@@ -123,6 +123,8 @@ install() {
   echo 'starting docker...'
   {
     systemctl start docker
+    systemctl enable containerd.service
+    systemctl enable docker.service
   } || {
     echo 'Docker could not be started.'
     echo_report_error_message
