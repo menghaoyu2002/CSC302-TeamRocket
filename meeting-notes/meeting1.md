@@ -142,14 +142,13 @@ The team met on October 3rd to discuss the following:
   - Not exceptionally good at working with data and analyzing data.
 
 - Containers
-
   - Only experience with docker and make/cmake
 
   - Docker commonly used
 
   - We will use docker because it will simply some assumptions we need to make about the user's machine
 
-   - We don't need to assume it has ANY of our dependencies on it except docker
+    - We don't need to assume it has ANY of our dependencies on it except docker
 
     - Instead, we will make all our assumptions about the docker container instead
 
@@ -160,33 +159,26 @@ The team met on October 3rd to discuss the following:
      - We  _know_ exactly what package manager is installed on our docker image
 
   - We also considered using make to allow the user to run the build, test, run commands via make.
+    - After some consideration, it seems like make will just be another dependency that we do not know is on the user's machine or not
+      - If it isn't we would have to install it
+      - How do we install it?
+      - We could automate this but we would need to know what the package manager is on the user's machine
+        - Instead, we will just settle and use bash scripts instead.
+        - it seems redundant to use a bash script to install make, and then use make after. We would have to use 2 build tools.
+      - Although bash scripts don't track dependencies and therefore can be run unnecessarily, this trade off seemed okay (why?)
+        - We are using python, which is not a compiled language. This means we do not need to compile anything with make, and thus the dependency management is redundant to us.
 
-   - After some consideration, it seems like make will just be another dependency that we do not know is on the user's machine or not
+        - Although the build script may build an identical docker image at times, this is a tradeoff we are willing to make.
 
-    - If it isn't we would have to install it
+          - This does not cause anything to break
 
-    - How do we install it?
+          - However, it does cause time and resources to be wasted building a duplicate image.
 
-     - We could automate this but we would need to know
-          what the package manager is on the user's machine
+            - Docker does cache builds (i think).
 
-    - Instead, we will just settle and use bash scripts instead.
+          - This might be an issue we need to address in the future if it's a big enough problem.
 
-     - Although bash scripts don't track dependencies and therefore can be run unnecessarily, this trade off seemed okay (why?)
-
-     - We are using python, which is not a compiled language. This means we do not need to compile anything with make, and thus the dependency management is redundant to us.
-
-     - Although the build script may build an identical docker image at times, this is a tradeoff we are willing to make.
-
-     - This does not cause anything to break
-
-     - However, it does cause time and resources to be wasted building a duplicate image.
-
-     - Docker does cache builds (i think).
-
-     - This might be an issue we need to address in the future if it's a big enough problem.
-
-     - It is always easy to convert back to make
+          - It is always easy to convert back to make
               files when we already have bash scripts
               that build, test, and run.
 
