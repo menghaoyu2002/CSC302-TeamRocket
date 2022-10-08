@@ -13,7 +13,7 @@ sudo ./scripts/script.sh
 
 For the sake of making the process of running each script a single command we have reduced it to one command. We also chose to omit the sudo command since it would be another dependency for us to manage.
 
-Also note that our setup currently only supports Ubuntu, Debian, Fedora, CentOS. And only supports the package managers apt, dnt, and yum.
+Also note that our setup currently only supports Ubuntu, Debian, Fedora, CentOS. And only supports the package managers apt, dnf, and yum.
 
 We chose to only support these OS because docker is only supported (without binaries) on CentOS, Debian, Fedora, Ubuntu, SLES, and RHEL. For the sake of supporting a more modern and commonly used linux, we chose to omit SLES and RHEL. Although the same setup works with Debian and Ubuntu derivatives, it seemed infeasible to manage such a large number of distros. We've handled this case via referring the user to the manual install page.
 
