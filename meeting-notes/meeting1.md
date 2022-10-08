@@ -306,11 +306,11 @@ The team met on October 3rd to discuss the following:
 
   - Create a command line script that can run _all_ our tests.
 
-    > # (Menghao)
+    > (Menghao)
 
   - Create command line script that can build our application
 
-    > # (Menghao)
+    > (Menghao)
 
     - That is, it will create a container that has a running \>
       instance of our python application within it.
