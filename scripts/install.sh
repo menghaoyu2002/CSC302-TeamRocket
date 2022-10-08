@@ -138,4 +138,4 @@ install() {
   }
 
   echo 'docker has been installed.'
-) 2>&1 | tee -a ./scripts/install_logs.txt
+) 2>&1 | tee ./scripts/install_logs.txt
