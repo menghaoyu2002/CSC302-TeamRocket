@@ -1,6 +1,18 @@
 # CSC302-TeamRocket
 
-## Setup 
+## Documentation
+
+Documentation can be found in our [Github Wiki](https://github.com/menghaoyu2002/CSC302-TeamRocket/wiki)
+
+## Meeting Notes
+
+Meeting notes can be found in our [meeting-notes folder](https://github.com/menghaoyu2002/CSC302-TeamRocket/tree/main/meeting-notes)
+
+## Roadmap
+
+The roadmap can be found in the the [root directory](https://github.com/menghaoyu2002/CSC302-TeamRocket) of our repo in a file named [ROADMAP.md](https://github.com/menghaoyu2002/CSC302-TeamRocket/blob/main/ROADMAP.md)
+
+## Setup
 
 This setup assumes that you are in the root directory of our project, and will break if you are not.
 
@@ -21,13 +33,13 @@ If your machine is running something else, you should get an informative error m
 
 We have not handled the case where shell scripts cannot be run on the machine, i.e. sh is not available. This seemed like a unlikely situation seeing as that the machine could be assumed to be running a modern linux.
 
-### Why is admin permissions required?
+### **Why is admin permissions required?**
 
 We need elevated permissions in order to install docker onto your machine. There is no way around it.
 
 Futhermore, when docker is installed, elevated permissions are required to run any docker command. This is because the user is not yet added to the docker group, which would require another step, and even when automated, will still require the user to logout or restart the machine.
 
-### Installing Dependencies
+### **Installing Dependencies**
 
 This script installs docker and all our dependencies.
 
@@ -35,7 +47,7 @@ This script installs docker and all our dependencies.
 su -c '. ./scripts/install.sh'
 ```
 
-### Building the Application
+### **Building the Application**
 
 This script builds our docker container.
 
@@ -43,7 +55,7 @@ This script builds our docker container.
 su -c '. ./scripts/build.sh'
 ```
 
-### Running the Application
+### **Running the Application**
 
 This script runs our docker container, i.e. the application.
 
@@ -51,7 +63,7 @@ This script runs our docker container, i.e. the application.
 su -c '. ./scripts/run.sh'
 ```
 
-### Running Tests
+### **Running Tests**
 
 This script runs all our tests.
 
