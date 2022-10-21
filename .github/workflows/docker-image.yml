@@ -1,18 +1,32 @@
-name: Docker Image CI
+name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: chmod +x ./scripts/* && ./scripts/build.sh
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: su -c '. ./scripts/build.sh'
+
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run the Docker image
+        run: su -c '. ./scripts/run.sh'
+
+  test:
+      runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test the application
+        run: su -c '. ./scripts/test.sh'
