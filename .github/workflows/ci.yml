@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: su -c '. ./scripts/build.sh'
+        run: ./scripts/build.sh
 
   run-image:
     runs-on: ubuntu-latest
@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run the Docker image
-        run: su -c '. ./scripts/run.sh'
+        run: ./scripts/run.sh
 
   test:
     runs-on: ubuntu-latest
@@ -29,4 +29,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Test the application
-        run: su -c '. ./scripts/test.sh'
+        run: ./scripts/test.sh
