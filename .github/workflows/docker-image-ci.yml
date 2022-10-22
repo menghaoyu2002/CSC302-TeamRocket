@@ -1,0 +1,24 @@
+name: Docker-CI
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: ./scripts/build.sh && ./scripts/run.sh
+
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test the application
+        run: ./scripts/build.sh && ./scripts/test.sh
