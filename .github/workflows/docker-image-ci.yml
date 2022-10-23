@@ -7,13 +7,13 @@ on:
     branches: ['main']
 
 jobs:
-  build-and-run:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: ./scripts/build.sh && ./scripts/run.sh
+        run: ./scripts/build.sh
 
   build-and-test:
     runs-on: ubuntu-latest
