@@ -8,14 +8,13 @@ from models.rowdata import RowData
 from constants import DEFAULT_DATABASE
 import pandas as pd
 
-
 @dataclass
 class Table:
     """Class to hold column and table names of the table in the database"""
     NAME = 'data'
     COLUMN_ENTITY = 'entity'
     COLUMN_YEAR = 'year'
-    COLUMN_PREVALENCE = 'prevalence'
+    COLUMN_UNDERNOURISHMENT = 'undernourishment'
 
 
 class DatabaseManager:
@@ -28,7 +27,7 @@ class DatabaseManager:
 
     def create_connection(self) -> None:
         """Opens a connection to the SQLite database."""
-        self.connection = sqlite3.connect(self.database)
+        self.connection = sqlite3.connect(self.database, check_same_thread=False)
 
     def close_connection(self) -> None:
         """Close the Connection to the database"""
@@ -49,7 +48,7 @@ class DatabaseManager:
                                 names=[
                                     Table.COLUMN_ENTITY,
                                     Table.COLUMN_YEAR,
-                                    Table.COLUMN_PREVALENCE])
+                                    Table.COLUMN_UNDERNOURISHMENT])
 
         dataframe.to_sql(Table.NAME, self.connection, index=False)
 
@@ -72,7 +71,7 @@ class DatabaseManager:
                                 names=[
                                     Table.COLUMN_ENTITY,
                                     Table.COLUMN_YEAR,
-                                    Table.COLUMN_PREVALENCE])
+                                    Table.COLUMN_UNDERNOURISHMENT])
 
         dataframe.to_sql(Table.NAME, self.connection,
                             if_exists='replace', index=False)
@@ -85,15 +84,25 @@ class DatabaseManager:
 
         return [RowData(row[0], row[1], row[2]) for row in rows]
 
-    def get_prevalence(self, entity: str, year: int) -> Optional[float]:
-        """Returns the prevalence of the given entity at the given year.
+    def get_undernourishment(self, entity: str, year: int) -> Optional[float]:
+        """Returns the undernourishment of the given entity at the given year.
         Returns None if there are no matches for the given entity and year.
         """
         params = (entity, year)
         cur = self.connection.cursor()
-        query = f'SELECT prevalence FROM {Table.NAME} WHERE \
+        query = f'SELECT {Table.COLUMN_UNDERNOURISHMENT} FROM {Table.NAME} WHERE \
             {Table.COLUMN_ENTITY}=? AND {Table.COLUMN_YEAR}=?'
         result = cur.execute(query, params).fetchone()
         cur.close()
 
         return result if result is None else result[0]
+
+    def get_data_by_name(self, name: str) -> List[RowData]:
+        """Returns a list of RowData object that have name as their RowData.entity."""
+        params = (name,)
+        cur = self.connection.cursor()
+        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_ENTITY}=?'
+        result = cur.execute(query, params).fetchall()
+        cur.close()
+
+        return [RowData(row[0], row[1], row[2]) for row in result]

@@ -8,8 +8,8 @@ class RowData:
     Instance Attributes:
       - self.entity: the country/location/category the data entry belongs to
       - self.year: the year of the row data
-      - self.prevalence: the prevalence of undernourishment as a percentage of the population
+      - self.undernourishment: the prevalence of undernourishment as a percentage of the population
     """
     entity: str
     year: int
-    prevalence: float
+    undernourishment: float
