@@ -1,5 +1,6 @@
-from dataclasses import dataclass
+"""Module for the RowData model."""
 
+from dataclasses import dataclass
 
 @dataclass
 class RowData:

@@ -1,11 +1,15 @@
+"""Module for testing the DatabaseManager."""
+
 from pathlib import Path
 from sqlite3 import Error
 from databasemanager import DatabaseManager
 
 class TestDatabaseManager:
+    """Class for testing DatabaseManager."""
     db_manager = DatabaseManager()
 
     def test_import(self):
+        """Test import_dataset() does not raise any exceptions."""
         path = Path(__file__).parent / '../app/datasets/prevalence-of-undernourishment.csv'
         try:
             self.db_manager.import_dataset(path)
@@ -19,6 +23,7 @@ class TestDatabaseManager:
             assert False
 
     def test_update(self):
+        """Test update_dataset() does not raise any exceptions."""
         path = Path(__file__).parent / '../app/datasets/prevalence-of-undernourishment.csv'
         try:
             self.db_manager.update_dataset(path)
@@ -30,4 +35,5 @@ class TestDatabaseManager:
             assert False
 
     def test_get_prevalence_one(self):
+        """Test get_prevalence() returns the correct value from the database."""
         assert self.db_manager.get_prevalence('Afghanistan', 2004) == 38.0

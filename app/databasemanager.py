@@ -1,3 +1,6 @@
+"""Module containing Classes and functions relating to managing
+the database."""
+
 import sqlite3
 from sqlite3 import Connection, Error
 from dataclasses import dataclass
