@@ -1,6 +1,7 @@
 """Module for testing the DatabaseManager."""
 
 from pathlib import Path
+from sqlite3 import Error
 from models.rowdata import RowData
 from databasemanager import DatabaseManager
 from constants import DATASET_PATH
@@ -14,7 +15,9 @@ class TestDatabaseManager:
         path = Path(__file__).parent / f'../app/{DATASET_PATH}'
         try:
             self.db_manager.import_dataset(path)
-        except:
+        except Error:
+            assert False
+        except FileNotFoundError:
             assert False
 
     def test_update(self):
@@ -22,7 +25,9 @@ class TestDatabaseManager:
         path = Path(__file__).parent / f'../app/{DATASET_PATH}'
         try:
             self.db_manager.update_dataset(path)
-        except:
+        except Error:
+            assert False
+        except FileNotFoundError:
             assert False
 
     def test_update_fail(self):
