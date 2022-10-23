@@ -10,6 +10,7 @@ import pandas as pd
 
 DEFAULT_DATABASE = 'sqlitedatabase.db'
 
+
 @dataclass
 class Table:
     """Class to hold column and table names of the table in the database"""
@@ -21,10 +22,10 @@ class Table:
 
 class DatabaseManager:
     """Class to manage data stored in an SQLite database"""
+
     def __init__(self, database=DEFAULT_DATABASE) -> None:
         self.database = database
         self.connection = self.create_connection()
-
 
     def create_connection(self) -> Connection:
         """Open and return Connection to the SQLite database."""
@@ -34,14 +35,12 @@ class DatabaseManager:
             print('Error connecting to database: ', error)
             return None
 
-
     def close_connection(self):
         """Close the Connection to the database"""
         try:
             self.connection.close()
         except Error as error:
             print('Error closing connection to database: ', error)
-
 
     def import_dataset(self, path: str) -> None:
         """Imports dataset specified by path and adds it to self.database if it doesn't already
@@ -53,7 +52,7 @@ class DatabaseManager:
         """
         try:
             if self.table_exists():
-                return # Table already exists, no need to import again
+                return  # Table already exists, no need to import again
         except Error as error:
             print(f'Error fetching data: {error}')
             raise Error from error
@@ -61,7 +60,7 @@ class DatabaseManager:
         try:
             dataframe = pd.read_csv(path,
                                     header=0,
-                                    usecols=[0,2,3],
+                                    usecols=[0, 2, 3],
                                     names=[
                                         Table.COLUMN_ENTITY,
                                         Table.COLUMN_YEAR,
@@ -79,7 +78,6 @@ class DatabaseManager:
             print(f'Error importing dataset into database: {error}')
             raise ValueError from error
 
-
     def table_exists(self) -> bool:
         """Returns whether the dataset already has a table in the database.
         Raises sqlite3.Error."""
@@ -92,7 +90,6 @@ class DatabaseManager:
         except Error as error:
             raise Error from error
 
-
     def update_dataset(self, path: str) -> None:
         """Imports dataset specified by path and adds it to self.database or replaces it if
         it already exists.
@@ -104,7 +101,7 @@ class DatabaseManager:
         try:
             dataframe = pd.read_csv(path,
                                     header=0,
-                                    usecols=[0,2,3],
+                                    usecols=[0, 2, 3],
                                     names=[
                                         Table.COLUMN_ENTITY,
                                         Table.COLUMN_YEAR,
@@ -117,11 +114,11 @@ class DatabaseManager:
             raise IOError from error
 
         try:
-            dataframe.to_sql(Table.NAME, self.connection, if_exists='replace', index=False)
+            dataframe.to_sql(Table.NAME, self.connection,
+                             if_exists='replace', index=False)
         except ValueError as error:
             print(f'Error updating dataset into database: {error}')
             raise ValueError from error
-
 
     def get_all_data(self) -> list:
         """Returns a list of RowData objects for each of the entries of the data in the database"""
@@ -132,7 +129,6 @@ class DatabaseManager:
         cur.close()
 
         return [RowData(row[0], row[1], row[2]) for row in rows]
-
 
     def get_prevalence(self, entity: str, year: int) -> float:
         """Returns the prevalence of the given entity at the given year.
