@@ -4,12 +4,13 @@ the main application
 
 from flask import Flask, request
 from pathlib import Path
-from constants import DATASET_PATH
+from constants import DATASET_PATH, DEFAULT_DATABASE
 from databasemanager import DatabaseManager
 
 app = Flask(__name__)
+app.config['DATABASE'] = DEFAULT_DATABASE
 
-db_manager = DatabaseManager()
+db_manager = DatabaseManager(app.config['DATABASE'])
 path = Path(__file__).parent / DATASET_PATH
 db_manager.import_dataset(path)
 
