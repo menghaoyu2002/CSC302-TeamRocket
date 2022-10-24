@@ -2,8 +2,8 @@
 the main application
 """
 
-from flask import Flask, request
 from pathlib import Path
+from flask import Flask, request
 from constants import DATASET_PATH, DEFAULT_DATABASE
 from databasemanager import DatabaseManager
 
