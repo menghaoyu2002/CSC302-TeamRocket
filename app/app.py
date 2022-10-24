@@ -31,12 +31,9 @@ def home_page():
     return "<p>This is the home page! Make sure the other routes are in different files!</p>"
 
 
-@app.route("/data/average", methods=["GET"])
-def get_average_undernourishment_by_name():
+@app.route("/<string:name>/average", methods=["GET"])
+def get_average_undernourishment_by_name(name):
     """Return the average undernourishment for the given country"""
-    args = request.args
-    name = args.get('name', default='World')
-
     data = db_manager.get_data_by_name(name)
 
     undernourishments = [row_data.undernourishment for row_data in data]
