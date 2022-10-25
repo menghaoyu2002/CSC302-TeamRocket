@@ -68,6 +68,9 @@ class DatabaseManager:
                          if_exists='replace', index=False)
 
     def _read_dataset(self, path: str) -> pd.DataFrame:
+        """
+        Read the dataset into a pandas dataframe
+        """
         dataframe = pd.read_csv(path,
                                 header=0,
                                 usecols=[0, 2, 3],
