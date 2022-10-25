@@ -25,28 +25,11 @@ def create_app(test_config=None):
     path = Path(__file__).parent / DATASET_PATH
     db_manager.import_dataset(path)
 
-
-    @app.route("/")
-    def index():
-        """
-        Create the index for the website.
-        """
-        return "<p>Index Page of the website</p>"
-
-
-    @app.route("/home")
-    def home_page():
-        """
-        Create the home page for the website.
-        """
-        return "<p>This is the home page! Make sure the other routes are in different files!</p>"
-
-
     @app.route("/<string:name>/average", methods=["GET"])
     def get_average_undernourishment_by_name(name):
         """Return the average undernourishment for the given country"""
         try:
-            data = db_manager.get_data_by_name(name)
+            data = db_manager.get_data_by_name(name.lower())
         except Error as error:
             return {
                 'error': {
