@@ -14,6 +14,7 @@ def get_undernourishment_by_name(name):
     try:
         db_manager = DatabaseManager(current_app.config['DATABASE'])
         data = db_manager.get_data_by_name(name.lower())
+        db_manager.close_connection()
         if len(data) == 0:
             return {
                 'error': {
