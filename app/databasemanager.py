@@ -109,7 +109,7 @@ class DatabaseManager:
         """Returns a list of RowData object that have name as their RowData.entity."""
         params = (name,)
         cur = self.connection.cursor()
-        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_ENTITY}=?'
+        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_ENTITY}=? ORDER BY year'
         result = cur.execute(query, params).fetchall()
         cur.close()
 
