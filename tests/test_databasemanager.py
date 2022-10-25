@@ -37,16 +37,22 @@ class TestDatabaseManager:
         except FileNotFoundError:
             assert True
 
-    def test_get_prevalence_one(self):
-        """Test get_prevalence() returns the correct value from the database."""
-        assert self.db_manager.get_prevalence('Afghanistan', 2004) == 38.0
+    def test_get_undernourishment_one(self):
+        """Test get_undernourishment() returns the correct value from the database."""
+        assert self.db_manager.get_undernourishment('Afghanistan', 2004) == 38.0
 
-    def test_get_prevalence_none(self):
-        """Test get_prevalence() returns None if there are no matches."""
-        assert self.db_manager.get_prevalence('Lalaland', 2004) is None
+    def test_get_undernourishment_none(self):
+        """Test get_undernourishment() returns None if there are no matches."""
+        assert self.db_manager.get_undernourishment('Lalaland', 2004) is None
 
     def test_get_all_data(self):
         """Test get_all_data() returns a list of RowData from the database."""
         data = self.db_manager.get_all_data()
         assert isinstance(data, list)
         assert data[0] == RowData('Afghanistan', 2001, 47.79999923706055)
+
+    def test_get_data_by_name(self):
+        """Test get_data_by_name() returns a list of all RowData with given name."""
+        data = self.db_manager.get_data_by_name('World')
+        assert isinstance(data, list)
+        assert data[0] == RowData('World', 2001, 13.199999809265137)
