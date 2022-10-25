@@ -2,9 +2,10 @@
 
 from pathlib import Path
 from sqlite3 import Error
-from models.rowdata import RowData
-from databasemanager import DatabaseManager
 from constants import DATASET_PATH
+from databasemanager import DatabaseManager
+from models.rowdata import RowData
+
 
 class TestDatabaseManager:
     """Class for testing DatabaseManager."""
@@ -39,7 +40,8 @@ class TestDatabaseManager:
 
     def test_get_undernourishment_one(self):
         """Test get_undernourishment() returns the correct value from the database."""
-        assert self.db_manager.get_undernourishment('Afghanistan', 2004) == 38.0
+        assert self.db_manager.get_undernourishment(
+            'afghanistan', 2004) == 38.0
 
     def test_get_undernourishment_none(self):
         """Test get_undernourishment() returns None if there are no matches."""
@@ -49,10 +51,10 @@ class TestDatabaseManager:
         """Test get_all_data() returns a list of RowData from the database."""
         data = self.db_manager.get_all_data()
         assert isinstance(data, list)
-        assert data[0] == RowData('Afghanistan', 2001, 47.79999923706055)
+        assert data[0] == RowData('afghanistan', 2001, 47.79999923706055)
 
     def test_get_data_by_name(self):
         """Test get_data_by_name() returns a list of all RowData with given name."""
-        data = self.db_manager.get_data_by_name('World')
+        data = self.db_manager.get_data_by_name('world')
         assert isinstance(data, list)
-        assert data[0] == RowData('World', 2001, 13.199999809265137)
+        assert data[0] == RowData('world', 2001, 13.199999809265137)
