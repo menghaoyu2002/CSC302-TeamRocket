@@ -31,6 +31,7 @@ class TempDatabaseSetup:
             self.close_db()
 
     def close_db(self):
+        """Close the temporary database"""
         os.close(self.db_fd)
         os.unlink(self.db_path)
         self.db_fd = None
