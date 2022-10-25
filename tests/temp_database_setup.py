@@ -10,9 +10,8 @@ from app import create_app
 class TempDatabaseSetup:
     """The base Class for testing any functionality requiring the database"""
 
-    def __init__(self) -> None:
-        self.db_fd = None
-        self.db_path = None
+    db_fd = None
+    db_path = None
 
     @pytest.fixture
     def client(self):
