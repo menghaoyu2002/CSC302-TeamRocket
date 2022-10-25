@@ -1,6 +1,7 @@
 """
 The API route handling database/data operations
 """
+
 from sqlite3 import Error
 from flask import Blueprint, current_app
 
@@ -11,6 +12,7 @@ data_blueprint = Blueprint("data", __name__)
 
 @data_blueprint.route('/<string:name>', methods=["GET"])
 def get_undernourishment_by_name(name):
+    """Return all data for the given name"""
     try:
         db_manager = DatabaseManager(current_app.config['DATABASE'])
         data = db_manager.get_data_by_name(name.lower())
