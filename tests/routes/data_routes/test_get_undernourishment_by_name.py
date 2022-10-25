@@ -1,6 +1,6 @@
 """Module for testing the get undernourishment by name endpoint"""
 
-from tests.TempDatabaseSetup import TempDatabaseSetup
+from tests.temp_database_setup import TempDatabaseSetup
 
 
 class TestGetUndernourishmentByName(TempDatabaseSetup):
@@ -21,6 +21,7 @@ class TestGetUndernourishmentByName(TempDatabaseSetup):
             expected_year += 1
 
     def test_get_nonexistent_undernourishment(self, client):
+        """Test that the endpoint returns an error message when the name does not exist"""
         res = client.get('/data/disneyland')
         assert res.status_code == 404
         expected_error_msg = 'No entry with the name disneyland'
@@ -29,6 +30,7 @@ class TestGetUndernourishmentByName(TempDatabaseSetup):
         assert actual_error_msg == expected_error_msg
 
     def test_get_undernourishment_with_db_error(self, client):
+        """Test that the endpoint handles the case where the database fails"""
         self.close_db()
         res = client.get('/data/disneyland')
         assert res.status_code == 500

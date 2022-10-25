@@ -1,7 +1,7 @@
 """Module for testing the average undernourishment endpoint"""
 
 
-from tests.TempDatabaseSetup import TempDatabaseSetup
+from tests.temp_database_setup import TempDatabaseSetup
 
 
 class TestAverageUndernourishment(TempDatabaseSetup):
