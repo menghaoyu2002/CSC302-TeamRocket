@@ -1,29 +1,11 @@
 """Module for testing the average undernourishment endpoint"""
 
-import os
-import tempfile
-import pytest
-from app import create_app
+
+from tests.TempDatabaseSetup import TempDatabaseSetup
 
 
-class TestAverageUndernourishment:
+class TestAverageUndernourishment(TempDatabaseSetup):
     """Class for testing the get_average_undernourishment_by_name endpoint"""
-
-    @pytest.fixture
-    def client(self):
-        """Fixture to be called before each test to set up app interface"""
-        db_fd, db_path = tempfile.mkstemp()
-
-        app = create_app({
-            'TESTING': True,
-            'DATABASE': db_path,
-        })
-
-        with app.test_client() as client:
-            yield client
-
-        os.close(db_fd)
-        os.unlink(db_path)
 
     def test_get_average_undernourishment_by_lower_name(self, client):
         """Tests get_average_undernourishment_by_name() to return correct average when
