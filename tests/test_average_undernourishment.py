@@ -34,7 +34,7 @@ class TestAverageUndernourishment:
         assert res.status_code == 200
 
     def test_get_average_undernourishment_by_case_insensitive_name(self, client):
-        """Tests get_average_undernourishment_by_name() to return correct average 
+        """Tests get_average_undernourishment_by_name() to return correct average
         when the name is upper and lower case.
         """
         res = client.get('/data/wOrLd/average')

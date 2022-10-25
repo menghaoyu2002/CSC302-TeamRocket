@@ -1,5 +1,8 @@
-from flask import Blueprint, current_app
+"""
+The API route handling database/data operations
+"""
 from sqlite3 import Error
+from flask import Blueprint, current_app
 
 from databasemanager import DatabaseManager
 

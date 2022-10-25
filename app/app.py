@@ -3,7 +3,6 @@ the main application
 """
 
 from pathlib import Path
-from sqlite3 import Error
 from flask import Flask
 from constants import DATASET_PATH, DEFAULT_DATABASE
 from databasemanager import DatabaseManager
@@ -25,6 +24,7 @@ def create_app(test_config=None):
     db_manager = DatabaseManager(app.config['DATABASE'])
     path = Path(__file__).parent / DATASET_PATH
     db_manager.import_dataset(path)
+    db_manager.close_connection()
 
     app.register_blueprint(data_blueprint, url_prefix='/data')
 
