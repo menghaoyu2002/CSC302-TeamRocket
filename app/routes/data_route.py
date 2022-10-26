@@ -62,6 +62,7 @@ def get_average_undernourishment_by_name(name):
 
 @data_blueprint.route('/years', methods=['GET'])
 def get_by_year_range():
+    """Return all data between the years start_year and end_year"""
     start_year = request.args.get('from')
     end_year = request.args.get('to')
 
