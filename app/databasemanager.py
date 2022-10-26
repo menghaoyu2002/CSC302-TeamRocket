@@ -119,7 +119,8 @@ class DatabaseManager:
         """Returns a list of RowData from start_year to end_year"""
 
         cur = self.connection.cursor()
-        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_YEAR} BETWEEN ? AND ? ORDER BY {Table.COLUMN_ENTITY}'
+        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_YEAR} \
+             BETWEEN ? AND ? ORDER BY {Table.COLUMN_ENTITY}'
         result = cur.execute(query, (start_year, end_year)).fetchall()
         cur.close()
 

@@ -72,6 +72,13 @@ def get_by_year_range():
             }
         }, 400
 
+    if not start_year.isdigit() or not end_year.isdigit():
+        return {
+            'error': {
+                'msg': '<from> and <to> must be valid years (non-negative integers)'
+            }
+        }, 400
+
     try:
         db_manager = DatabaseManager(current_app.config['DATABASE'])
         data = db_manager.get_data_from_year_range(start_year, end_year)
