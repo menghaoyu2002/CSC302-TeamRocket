@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 
+
 @dataclass
 class RowData:
     """Class representing a row/entry in the dataset in the database.
@@ -10,6 +11,6 @@ class RowData:
       - self.year: the year of the row data
       - self.undernourishment: the prevalence of undernourishment as a percentage of the population
     """
-    entity: str
+    name: str
     year: int
     undernourishment: float

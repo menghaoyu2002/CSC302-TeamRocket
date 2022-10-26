@@ -106,10 +106,10 @@ class DatabaseManager:
         return result if result is None else result[0]
 
     def get_data_by_name(self, name: str) -> List[RowData]:
-        """Returns a list of RowData object that have name as their RowData.entity."""
+        """Returns a list of RowData object that have name as their RowData.name."""
         params = (name,)
         cur = self.connection.cursor()
-        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_ENTITY}=?'
+        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_ENTITY}=? ORDER BY year'
         result = cur.execute(query, params).fetchall()
         cur.close()
 
