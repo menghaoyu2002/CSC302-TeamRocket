@@ -122,9 +122,9 @@ class DatabaseManager:
         RowData.name = name,
         and RowData.year = year
         """
-        params = (year, name)
+        params = (name, year)
         cur = self.connection.cursor()
-        query = f"SELECT * from {Table.NAME} WHERE {Table.COLUMN_YEAR}=? AND {Table.COLUMN_ENTITY}=? ORDER BY year"
+        query = f"SELECT * from {Table.NAME} WHERE {Table.COLUMN_ENTITY}=? AND {Table.COLUMN_YEAR}=? ORDER BY year"
         result = cur.execute(query, params).fetchall()
         cur.close()
 
