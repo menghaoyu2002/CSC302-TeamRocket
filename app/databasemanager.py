@@ -114,3 +114,18 @@ class DatabaseManager:
         cur.close()
 
         return [RowData(row[0], row[1], row[2]) for row in result]
+    
+    def get_data_by_name_and_year(self, name: str, year: int) -> List[RowData]:
+        """
+        Return a list of RowData objects such that:
+        for every RowData in the list,
+        RowData.name = name,
+        and RowData.year = year
+        """
+        params = (year, name)
+        cur = self.connection.cursor()
+        query = f"SELECT * from {Table.NAME} WHERE {Table.COLUMN_YEAR}=? AND {Table.COLUMN_ENTITY}=? ORDER BY year"
+        result = cur.execute(query, params).fetchall()
+        cur.close()
+
+        return [RowData(row[0], row[1], row[2]) for row in result]
