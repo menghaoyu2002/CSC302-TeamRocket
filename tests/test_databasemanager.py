@@ -46,7 +46,19 @@ class TestDatabaseManager:
     def test_get_undernourishment_none(self):
         """Test get_undernourishment() returns None if there are no matches."""
         assert self.db_manager.get_undernourishment('Lalaland', 2004) is None
-
+            
+    def test_get_data_by_name_and_year(self):
+        """
+        Test functionality of test_get_data_by_name_and_year()
+        """
+        
+        try:
+            print("Beginning tests for method get_data_by_name_and_year()...")
+            test_result = self.db_manager.get_data_by_name_and_year("Canada", 2001)
+            assert test_result[2] == 2.5
+        except:
+            print("Exception raised when testing method: get_data_by_name_and_year.")
+    
     def test_get_all_data(self):
         """Test get_all_data() returns a list of RowData from the database."""
         data = self.db_manager.get_all_data()
