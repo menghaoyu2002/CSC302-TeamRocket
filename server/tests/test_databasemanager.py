@@ -13,7 +13,7 @@ class TestDatabaseManager:
 
     def test_import(self):
         """Test import_dataset() does not raise any exceptions."""
-        path = Path(__file__).parent / f'../app/{DATASET_PATH}'
+        path = Path(__file__).parent / f'../{DATASET_PATH}'
         try:
             self.db_manager.import_dataset(path)
         except Error:
@@ -23,7 +23,7 @@ class TestDatabaseManager:
 
     def test_update(self):
         """Test update_dataset() does not raise any exceptions."""
-        path = Path(__file__).parent / f'../app/{DATASET_PATH}'
+        path = Path(__file__).parent / f'../{DATASET_PATH}'
         try:
             self.db_manager.update_dataset(path)
         except Error:
