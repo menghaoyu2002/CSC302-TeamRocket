@@ -8,6 +8,9 @@ on:
 
 jobs:
   lint:
+    defaults:
+      run:
+        working-directory: server
     runs-on: ubuntu-latest
     strategy:
       matrix:

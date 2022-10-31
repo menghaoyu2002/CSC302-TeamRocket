@@ -4,10 +4,9 @@ the database."""
 import sqlite3
 from dataclasses import dataclass
 from typing import List, Optional
-
+import pandas as pd
 from models.rowdata import RowData
 from constants import DEFAULT_DATABASE
-import pandas as pd
 
 
 @dataclass
