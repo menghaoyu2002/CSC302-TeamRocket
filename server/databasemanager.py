@@ -3,14 +3,11 @@ the database."""
 
 import sqlite3
 from dataclasses import dataclass
-import sys
 from typing import List, Optional
 
 from models.rowdata import RowData
 from constants import DEFAULT_DATABASE
 import pandas as pd
-import pathlib
-import os
 
 
 @dataclass
@@ -27,13 +24,13 @@ class DatabaseManager:
 
     def __init__(self, database=DEFAULT_DATABASE) -> None:
         self.database = database
-        self.connection=None
+        self.connection = None
         self.create_connection()
 
     def create_connection(self) -> None:
         """Opens a connection to the SQLite database."""
-        self.connection=sqlite3.connect(
-            self.database, check_same_thread = False)
+        self.connection = sqlite3.connect(
+            self.database, check_same_thread=False)
 
     def close_connection(self) -> None:
         """Close the Connection to the database"""
@@ -48,15 +45,15 @@ class DatabaseManager:
         if self.table_exists():
             return  # Table already exists, no need to import again
 
-        dataframe=self._read_dataset(path)
+        dataframe = self._read_dataset(path)
 
-        dataframe.to_sql(Table.NAME, self.connection, index = False)
+        dataframe.to_sql(Table.NAME, self.connection, index=False)
 
     def table_exists(self) -> bool:
         """Returns whether the dataset already has a table in the database."""
-        cur=self.connection.cursor()
-        query=f"SELECT name FROM sqlite_master WHERE type='table' AND name='{Table.NAME}'"
-        rows=cur.execute(query).fetchall()
+        cur = self.connection.cursor()
+        query = f"SELECT name FROM sqlite_master WHERE type='table' AND name='{Table.NAME}'"
+        rows = cur.execute(query).fetchall()
         return rows != []
 
     def update_dataset(self, path: str) -> None:
@@ -65,32 +62,32 @@ class DatabaseManager:
 
         Assume the dataset is a csv of the form: Country, Country-code, year, prevalence.
         """
-        dataframe=self._read_dataset(path)
+        dataframe = self._read_dataset(path)
 
         dataframe.to_sql(Table.NAME, self.connection,
-                         if_exists = 'replace', index = False)
+                         if_exists='replace', index=False)
 
     def _read_dataset(self, path: str) -> pd.DataFrame:
         """
         Read the dataset into a pandas dataframe
         """
-        dataframe=pd.read_csv(path,
-                                header = 0,
-                                usecols = [0, 2, 3],
-                                names = [
+        dataframe = pd.read_csv(path,
+                                header=0,
+                                usecols=[0, 2, 3],
+                                names=[
                                     Table.COLUMN_ENTITY,
                                     Table.COLUMN_YEAR,
                                     Table.COLUMN_UNDERNOURISHMENT]
                                 )
 
-        dataframe[Table.COLUMN_ENTITY]=dataframe[Table.COLUMN_ENTITY].str.lower()
+        dataframe[Table.COLUMN_ENTITY] = dataframe[Table.COLUMN_ENTITY].str.lower()
 
         return dataframe
 
     def get_all_data(self) -> List[RowData]:
         """Returns a list of RowData objects for each of the entries of the data in the database"""
-        cur=self.connection.cursor()
-        rows=cur.execute(f'SELECT * FROM {Table.NAME}').fetchall()
+        cur = self.connection.cursor()
+        rows = cur.execute(f'SELECT * FROM {Table.NAME}').fetchall()
         cur.close()
 
         return self._parse_to_rowdata(rows)
@@ -99,21 +96,21 @@ class DatabaseManager:
         """Returns the undernourishment of the given entity at the given year.
         Returns None if there are no matches for the given entity and year.
         """
-        params=(entity, year)
-        cur=self.connection.cursor()
-        query=f'SELECT {Table.COLUMN_UNDERNOURISHMENT} FROM {Table.NAME} WHERE \
+        params = (entity, year)
+        cur = self.connection.cursor()
+        query = f'SELECT {Table.COLUMN_UNDERNOURISHMENT} FROM {Table.NAME} WHERE \
             {Table.COLUMN_ENTITY}=? AND {Table.COLUMN_YEAR}=?'
-        result=cur.execute(query, params).fetchone()
+        result = cur.execute(query, params).fetchone()
         cur.close()
 
         return result if result is None else result[0]
 
     def get_data_by_name(self, name: str) -> List[RowData]:
         """Returns a list of RowData object that have name as their RowData.name."""
-        params=(name,)
-        cur=self.connection.cursor()
-        query=f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_ENTITY}=? ORDER BY year'
-        result=cur.execute(query, params).fetchall()
+        params = (name,)
+        cur = self.connection.cursor()
+        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_ENTITY}=? ORDER BY year'
+        result = cur.execute(query, params).fetchall()
         cur.close()
 
         return self._parse_to_rowdata(result)
@@ -121,10 +118,10 @@ class DatabaseManager:
     def get_data_from_year_range(self, start_year: int, end_year: int) -> List[RowData]:
         """Returns a list of RowData from start_year to end_year"""
 
-        cur=self.connection.cursor()
-        query=f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_YEAR} \
+        cur = self.connection.cursor()
+        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_YEAR} \
              BETWEEN ? AND ? ORDER BY {Table.COLUMN_ENTITY}'
-        result=cur.execute(query, (start_year, end_year)).fetchall()
+        result = cur.execute(query, (start_year, end_year)).fetchall()
         cur.close()
 
         return self._parse_to_rowdata(result)
