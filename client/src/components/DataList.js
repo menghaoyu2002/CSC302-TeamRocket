@@ -1,10 +1,4 @@
-import { RowData } from "../types/RowData";
-
-interface IDataListProps {
-  data: RowData[];
-}
-
-export default function DataList({ data }: IDataListProps) {
+export default function DataList({ data }) {
   return (
     <ul>
       {data.map((row) => (

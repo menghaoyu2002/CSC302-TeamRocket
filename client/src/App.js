@@ -2,12 +2,11 @@ import { useState } from "react";
 import "./App.css";
 import DataList from "./components/DataList";
 import GetDataForm from "./components/GetDataForm";
-import { RowData } from "./types/RowData";
 
 function App() {
-  const [rowData, setRowData] = useState<RowData[]>([]);
+  const [rowData, setRowData] = useState([]);
 
-  const setError = (error: string) => {
+  const setError = (error) => {
     alert(error);
   };
 

@@ -1,18 +1,12 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { RowData } from "../types/RowData";
 
-interface IGetDataFormProps {
-  setData: (data: RowData[]) => void;
-  setError: (error: string) => void;
-}
-
-export default function GetDataForm({ setData, setError }: IGetDataFormProps) {
+export default function GetDataForm({ setData, setError }) {
   const [name, setName] = useState("");
   const [startYear, setStartYear] = useState(new Date().getFullYear());
   const [endYear, setEndYear] = useState(new Date().getFullYear());
 
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // TODO: change endpoint to getDataByNameAndYearRange
     await axios
