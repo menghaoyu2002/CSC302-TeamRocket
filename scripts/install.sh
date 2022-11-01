@@ -76,22 +76,6 @@ install() {
   fi
 }
 
-install_compose() {
-  echo "installing docker compose" 
-  {
-    DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
-    mkdir -p $DOCKER_CONFIG/cli-plugins
-    curl -SL https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
-    chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
-
-    echo "testing docker compose installation"
-    docker compose version
-  } || {
-    echo "unable to install docker compose"
-    echo_report_error_message
-  }
-
-}
 (
   # check which version of linux
   # source https://unix.stackexchange.com/questions/6345/how-can-i-get-distribution-name-and-version-number-in-a-simple-shell-script
@@ -156,10 +140,4 @@ install_compose() {
   }
 
   echo 'docker has been installed.'
-
-  install_compose
-
-  echo 'docker compose has been installed'
-
-  echo 'dependencies have been successfully installed'
 ) 2>&1 | tee ./scripts/install_logs.txt
