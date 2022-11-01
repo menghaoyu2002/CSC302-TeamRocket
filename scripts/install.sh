@@ -20,7 +20,7 @@ apt_install () {
   {
     mkdir -p /etc/apt/keyrings
 
-    curl -fsSL $GPG_LINK | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    curl -fsSL -k $GPG_LINK | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
     echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] $REPO_LINK \
