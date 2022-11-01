@@ -1,1 +1,1 @@
-python -m flask --app ./server/app.py run 
+gunicorn --chdir ./server --bind localhost "app:create_app()" --reload
