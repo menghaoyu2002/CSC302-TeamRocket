@@ -30,7 +30,6 @@ export default function GetDataForm({ setData, setError }) {
       <label htmlFor="name">Name: </label>
       <input
         type="text"
-        className="rounded ring-2 ring-slate-400 p-1"
         name="name"
         id="name"
         required={true}
@@ -39,7 +38,6 @@ export default function GetDataForm({ setData, setError }) {
       <label htmlFor="start-year">Start Year: </label>
       <input
         type="number"
-        className="rounded ring-2 ring-slate-400 p-1"
         name="start-year"
         id="start-year"
         required={true}
