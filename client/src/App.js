@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import DataList from "./components/DataList";
+import GetDataForm from "./components/GetDataForm";
 
 function App() {
+  const [rowData, setRowData] = useState([]);
+
+  const setError = (error) => {
+    alert(error);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GetDataForm setData={setRowData} setError={setError}></GetDataForm>
+      <DataList data={rowData}></DataList>
     </div>
   );
 }
