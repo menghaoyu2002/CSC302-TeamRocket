@@ -23,7 +23,6 @@ This setup assumes that you are in the root directory of our project, and will b
 NOTE: it is highly recommended that you run each of our shell scripts as follows where script.sh is the name of the script.
 
 ```bash
-chmod +x ./scripts/*
 sudo ./scripts/script.sh
 ```
 
@@ -48,15 +47,15 @@ Futhermore, when docker is installed, elevated permissions are required to run a
 This script installs docker and all our dependencies.
 
 ```bash
-su -c '. ./scripts/install.sh'
+su -c './scripts/install.sh'
 ```
 
 ### **Building the Application**
 
-This script builds our docker container.
+This script builds our docker image.
 
 ```bash
-su -c '. ./scripts/build.sh'
+su -c 'docker compose build'
 ```
 
 ### **Running the Application**
@@ -64,13 +63,15 @@ su -c '. ./scripts/build.sh'
 This script runs our docker container, i.e. the application.
 
 ```bash
-su -c '. ./scripts/run.sh'
+su -c 'docker compose up'
 ```
+
+Then navigate to http://localhost:3000 to view the running application.
 
 ### **Running Tests**
 
-This script runs all our tests.
+This script runs all our tests. NOTE: the application must be first built before tests can be run.
 
 ```bash
-su -c '. ./scripts/test.sh'
+su -c './scripts/test.sh'
 ```
