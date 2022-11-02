@@ -2,7 +2,7 @@
 
 echo 'starting the server...'
 {
-	docker run -it -p 5000:5000 --rm  --name team_rocket_server team_rocket_server
+	docker run -it -p 5000:5000 --rm  --name csc302-teamrocket-server csc302-teamrocket-server
 	echo ""
 } || {
 	echo 'Failed. There was an issue running the server with its docker image.'

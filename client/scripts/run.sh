@@ -1,9 +1,8 @@
-
 #!/bin/sh
 
 echo 'starting the client...'
 {
-	docker run -it -p 3000:3000 --rm --name team_rocket_client team_rocket_client
+	docker run -it -p 3000:3000 --rm --name csc302-teamrocket-client csc302-teamrocket-client
 	echo ""
 } || {
 	echo 'Failed. There was an issue running the client with its docker image.'
