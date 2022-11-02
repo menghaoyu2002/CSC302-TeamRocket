@@ -1,8 +1,9 @@
 # CSC302-TeamRocket
 
-[![Docker-CI](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/docker-image-ci.yml/badge.svg)](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/docker-image-ci.yml)
+[![Docker-CI](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/docker-ci.yml/badge.svg)](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/docker-ci.yml)
 [![Pylint](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/lint.yml/badge.svg)](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/lint.yml)
 [![Python application](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/python-ci.yml/badge.svg)](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/python-ci.yml)
+[![Node.js CI](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/nodejs.yml/badge.svg)](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/nodejs.yml)
 
 ## Documentation
 
