@@ -66,6 +66,8 @@ This script runs our docker container, i.e. the application.
 su -c 'docker compose up'
 ```
 
+Then navigate to http://localhost:3000 to view the running application.
+
 ### **Running Tests**
 
 This script runs all our tests. NOTE: the application must be first built before tests can be run.
