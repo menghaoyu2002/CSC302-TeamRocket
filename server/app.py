@@ -4,6 +4,7 @@ the main application
 
 from pathlib import Path
 from flask import Flask
+from flask_cors import CORS
 from constants import DATASET_PATH, DEFAULT_DATABASE
 from databasemanager import DatabaseManager
 from routes.data_route import data_blueprint
@@ -12,6 +13,7 @@ from routes.data_route import data_blueprint
 def create_app(test_config=None):
     """App factory"""
     app = Flask(__name__)
+    CORS(app)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=DEFAULT_DATABASE,
