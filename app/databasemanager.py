@@ -115,16 +115,16 @@ class DatabaseManager:
 
         return [RowData(row[0], row[1], row[2]) for row in result]
     
-    def get_data_by_name_and_year(self, name: str, year: int) -> List[RowData]:
+    def get_data_by_name_and_year_range(self, name: str, start_year: int, end_year: int) -> List[RowData]:
         """
         Return a list of RowData objects such that:
         for every RowData in the list,
         RowData.name = name,
-        and RowData.year = year
+        and RowData.year is between start_year and end_year
         """
-        params = (name, year)
+        params = (name, start_year, end_year)
         cur = self.connection.cursor()
-        query = f"SELECT * from {Table.NAME} WHERE {Table.COLUMN_ENTITY}=? AND {Table.COLUMN_YEAR}=? ORDER BY year"
+        query = f"SELECT * from {Table.NAME} WHERE {Table.COLUMN_ENTITY}=? AND ({Table.COLUMN_YEAR} BETWEEN ? and ?) ORDER BY year"
         result = cur.execute(query, params).fetchall()
         cur.close()
 
