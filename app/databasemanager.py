@@ -16,7 +16,7 @@ class Table:
     NAME = 'data'
     COLUMN_ENTITY = 'entity'
     COLUMN_YEAR = 'year'
-    COLUMN_UNDERNOURISHMENT = 'undernourishmentsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss'
+    COLUMN_UNDERNOURISHMENT = 'undernourishment'
 
 
 class DatabaseManager:
