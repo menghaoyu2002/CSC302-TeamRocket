@@ -89,7 +89,7 @@ def get_undernourishment_by_name_and_year_range(name: str) -> "tuple[dict, int]"
         db_manager = DatabaseManager(current_app.config['DATABASE'])
         
         # Return a list of n-tuples where each n-tuple corresponds to a row in the database
-        data = db_manager.get_data_from_year_range(name, start_year, end_year)
+        data = db_manager.get_data_by_name_and_year_range(name, start_year, end_year)
 
         # Close connection to the database since it is no longer required
         db_manager.close_connection()
