@@ -68,15 +68,15 @@ def get_undernourishment_by_name_and_year_range(name: str) -> "tuple[dict, int]"
     end_year = request.args.get('to')
 
     # Check that start_year and end_year were provided in the request.
-    if not start_year or not end_year:
+    if not start_year or not end_year or not name:
         return {
             'error': {
-                'msg': 'parameters <from> and <to> are required in the query string'
+                'msg': 'valid parameters <name>, <from> and <to> are required in the query string'
             }
         }, 400
 
     # Check that start_year and end_year both consist of numbers only
-    if not start_year.isdigit() or not end_year.isdigit():
+    if not start_year.isdigit() or not end_year.isdigit() or not isinstance(name, str):
         return {
             'error': {
                 'msg': '<from> and <to> must be valid years (non-negative integers)'
