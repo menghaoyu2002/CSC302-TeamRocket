@@ -16,7 +16,7 @@ class Table:
     NAME = 'data'
     COLUMN_ENTITY = 'entity'
     COLUMN_YEAR = 'year'
-    COLUMN_UNDERNOURISHMENT = 'undernourishment'
+    COLUMN_UNDERNOURISHMENT = 'undernourishmentsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss'
 
 
 class DatabaseManager:
@@ -115,7 +115,7 @@ class DatabaseManager:
 
         return [RowData(row[0], row[1], row[2]) for row in result]
     
-    def get_data_by_name_and_year_range(self, name: str, start_year: int, end_year: int) -> List[RowData]:
+    def get_data_by_name_and_year_range(self, name: str, start_year: float, end_year: float) -> List[RowData]:
         """
         Return a list of RowData objects such that:
         for every RowData in the list,
