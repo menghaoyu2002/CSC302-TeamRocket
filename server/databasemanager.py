@@ -4,10 +4,9 @@ the database."""
 import sqlite3
 from dataclasses import dataclass
 from typing import List, Optional
-
+import pandas as pd
 from models.rowdata import RowData
 from constants import DEFAULT_DATABASE
-import pandas as pd
 
 
 @dataclass
@@ -90,7 +89,7 @@ class DatabaseManager:
         rows = cur.execute(f'SELECT * FROM {Table.NAME}').fetchall()
         cur.close()
 
-        return [RowData(row[0], row[1], row[2]) for row in rows]
+        return self._parse_to_rowdata(rows)
 
     def get_undernourishment(self, entity: str, year: int) -> Optional[float]:
         """Returns the undernourishment of the given entity at the given year.
@@ -113,8 +112,8 @@ class DatabaseManager:
         result = cur.execute(query, params).fetchall()
         cur.close()
 
-        return [RowData(row[0], row[1], row[2]) for row in result]
-    
+        return self._parse_to_rowdata(result)
+
     def get_data_by_name_and_year_range(self, name: str, start_year: float, end_year: float) -> List[RowData]:
         """
         Return a list of RowData objects such that:
@@ -128,4 +127,18 @@ class DatabaseManager:
         result = cur.execute(query, params).fetchall()
         cur.close()
 
-        return [RowData(row[0], row[1], row[2]) for row in result]
+        return self._parse_to_rowdata(result)
+
+    def get_data_from_year_range(self, start_year: int, end_year: int) -> List[RowData]:
+        """Returns a list of RowData from start_year to end_year"""
+
+        cur = self.connection.cursor()
+        query = f'SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_YEAR} \
+             BETWEEN ? AND ? ORDER BY {Table.COLUMN_ENTITY}'
+        result = cur.execute(query, (start_year, end_year)).fetchall()
+        cur.close()
+
+        return self._parse_to_rowdata(result)
+
+    def _parse_to_rowdata(self, data: list) -> List[RowData]:
+        return [RowData(row[0], row[1], row[2]) for row in data]

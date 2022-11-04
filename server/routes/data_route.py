@@ -21,7 +21,8 @@ def get_undernourishment_by_name(name):
             return {
                 'error': {
                     'msg': 'No entry with the name ' + name
-                }}, 404
+                }
+            }, 404
         return {'data': data}, 200
     except Error as error:
         return {
@@ -58,8 +59,42 @@ def get_average_undernourishment_by_name(name):
         'error': 'No data found for name: ' + name
     }, 404
 
+
+@data_blueprint.route('/years', methods=['GET'])
+def get_by_year_range():
+    """Return all data between the years start_year and end_year"""
+    start_year = request.args.get('from')
+    end_year = request.args.get('to')
+
+    if not start_year or not end_year:
+        return {
+            'error': {
+                'msg': 'parameters <from> and <to> are required in the query string'
+            }
+        }, 400
+
+    if not start_year.isdigit() or not end_year.isdigit():
+        return {
+            'error': {
+                'msg': '<from> and <to> must be valid years (non-negative integers)'
+            }
+        }, 400
+
+    try:
+        db_manager = DatabaseManager(current_app.config['DATABASE'])
+        data = db_manager.get_data_from_year_range(start_year, end_year)
+        db_manager.close_connection()
+        return {'data': data}, 200
+    except Error as error:
+        return {
+            'error': {
+                'msg': f'Error fetching data: {error}'
+            }
+        }, 500
+
+
 @data_blueprint.route("/<string:name>/years", methods=["GET"])
-def get_undernourishment_by_name_and_year_range(name: str) -> "tuple[dict, int]":
+def get_undernourishment_by_name_and_year_range(name: str):
     """
     Return data with name between the years start_year and end_year.
     """
@@ -79,17 +114,18 @@ def get_undernourishment_by_name_and_year_range(name: str) -> "tuple[dict, int]"
     if not start_year.isdigit() or not end_year.isdigit() or not isinstance(name, str):
         return {
             'error': {
-                'msg': '<from> and <to> must be valid years (non-negative integers)'
+                'msg': 'parameters <from> and <to> are required in the query string'
             }
         }, 400
 
-    # Attempt to return data from the sqlite database
-    # The second element in the tuple is the error code
+    # # Attempt to return data from the sqlite database
+    # # The second element in the tuple is the error code
     try:
         db_manager = DatabaseManager(current_app.config['DATABASE'])
-        
+
         # Return a list of n-tuples where each n-tuple corresponds to a row in the database
-        data = db_manager.get_data_by_name_and_year_range(name, start_year, end_year)
+        data = db_manager.get_data_by_name_and_year_range(
+            name, start_year, end_year)
 
         # Close connection to the database since it is no longer required
         db_manager.close_connection()

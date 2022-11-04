@@ -3,11 +3,18 @@ name: Pylint
 on:
   push:
     branches: ['main']
+    paths:
+      - server/**
   pull_request:
     branches: ['main']
+    paths:
+      - server/**
 
 jobs:
   lint:
+    defaults:
+      run:
+        working-directory: server
     runs-on: ubuntu-latest
     strategy:
       matrix:

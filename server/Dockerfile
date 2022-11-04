@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD [ "python", "-m", "flask", "--app", "./app/app.py", "run", "--host","0.0.0.0"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:create_app()"]

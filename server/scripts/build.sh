@@ -1,8 +1,8 @@
 #!/bin/sh
 
-echo 'building docker image...'
+echo 'building docker server image...'
 { 
-	docker build -t team_rocket_app .
+	docker build -t csc302-teamrocket-server .
 } || {
 	echo 'docker build failed.'
 	echo 'Please report the issue to https://github.com/menghaoyu2002/CSC302-TeamRocket/issues with your terminal output'
