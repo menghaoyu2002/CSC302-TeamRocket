@@ -1,8 +1,8 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState } from 'react';
+import axios from '../axios';
 
 export default function GetDataForm({ setData, setError }) {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [startYear, setStartYear] = useState(new Date().getFullYear());
   const [endYear, setEndYear] = useState(new Date().getFullYear());
 
@@ -10,7 +10,7 @@ export default function GetDataForm({ setData, setError }) {
     event.preventDefault();
     // TODO: change endpoint to getDataByNameAndYearRange
     await axios
-      .get(`http://host.docker.internal:5000/data/${name}`)
+      .get(`/data/${name}`)
       .then((res) => {
         if (res.status === 200) {
           setData(res.data.data);
@@ -21,7 +21,7 @@ export default function GetDataForm({ setData, setError }) {
         if (error.response) {
           setError(error.response.data.error.msg);
         } else {
-          setError("Something went wrong...");
+          setError('Something went wrong...');
         }
       });
   };
