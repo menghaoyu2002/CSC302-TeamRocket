@@ -45,6 +45,8 @@ Futhermore, when docker is installed, elevated permissions are required to run a
 
 ### **Installing Dependencies**
 
+NOTE: only run one of the commands, not both.
+
 This script installs docker and all our dependencies.
 
 ```bash
