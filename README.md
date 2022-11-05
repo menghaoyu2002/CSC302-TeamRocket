@@ -11,7 +11,7 @@ Documentation can be found in our [Github Wiki](https://github.com/menghaoyu2002
 
 ## Meeting Notes
 
-Meeting notes can be found in our [meeting-notes folder](https://github.com/menghaoyu2002/CSC302-TeamRocket/tree/main/meeting-notes)
+Meeting notes and postmortems can be found in our [meeting-notes folder](https://github.com/menghaoyu2002/CSC302-TeamRocket/tree/main/meeting-notes)
 
 ## Roadmap
 
