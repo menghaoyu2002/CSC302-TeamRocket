@@ -9,7 +9,7 @@
 - Implement simple CI/CD using github actions to help enfore the one way quality ratchet
 
 ## Goals Missed
-- We set out 4 enpoints to create by the end of this week but due to some unforseen circumstances, only 3 were completed.
+- We set out 4 endpoints to create by the end of this week but due to some unforseen circumstances, only 3 were completed.
 - We also planned to make our basic interface at least slightly aesthetically pleasing by the end of this week, but we didn't account for midterms and other workloads so this goal was missed (the webpage has virtually no styling, only html).
 
 ## Plan Adjustments
