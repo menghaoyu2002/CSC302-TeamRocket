@@ -11,6 +11,8 @@
 ## Goals Missed
 - We set out 4 endpoints to create by the end of this week but due to some unforseen circumstances, only 3 were completed.
 - We also planned to make our basic interface at least slightly aesthetically pleasing by the end of this week, but we didn't account for midterms and other workloads so this goal was missed (the webpage has virtually no styling, only html).
+  - This goal was not missed by that much since the page was only temporary, and any styling added would've likely been removed since the page would be reformatted into graphs
+- while not necessarily a goal missed, an issue that needed to be addressed is how big changes into the codebase can be merged without breaking branches that others are working on.
 
 ## Plan Adjustments
 - Based on the time we have left, we may have to scratch the idea of having more sophisticated data transformations like linear regressions.
@@ -20,3 +22,6 @@
 - In terms of our missed goals, we realized that we could not allocate as much time as we thought into this course as most of us were extremely busy with other midterms and projects which is why we missed 2 of our goals for this week. This is also a reason why we should reduce our scope a bit and lower the expectations for our weekly tasks by making our PRs/tasks smaller.
 - Estimations should be given for each task, by the person assigned to each task.
 - If assisstance is required, the team should be informed early.
+- Big changes should be announced first to the team, this can avoid merge conflicts
+- Big changes should be broken down into smaller changes
+- Be aware of what changes you're making, if you know a portion of your change affects others, get that part merged in first
