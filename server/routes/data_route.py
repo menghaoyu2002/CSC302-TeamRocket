@@ -91,3 +91,19 @@ def get_by_year_range():
                 'msg': f'Error fetching data: {error}'
             }
         }, 500
+
+
+@data_blueprint.route('/names', methods=['GET'])
+def get_all_names():
+    """Return a list of all entity names"""
+    try:
+        db_manager = DatabaseManager(current_app.config['DATABASE'])
+        data = db_manager.get_all_names()
+        db_manager.close_connection()
+        return {'data': data}, 200
+    except Error as error:
+        return {
+            'error': {
+                'msg': f'Error fetching data: {error}'
+            }
+        }, 500

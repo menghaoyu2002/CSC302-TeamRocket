@@ -125,5 +125,14 @@ class DatabaseManager:
 
         return self._parse_to_rowdata(result)
 
+    def get_all_names(self) -> List[str]:
+        """Returns a list of all the names in the database"""
+        cur = self.connection.cursor()
+        query = f'SELECT DISTINCT {Table.COLUMN_ENTITY} FROM {Table.NAME}'
+        result = cur.execute(query).fetchall()
+        cur.close()
+
+        return [row[0] for row in result]
+
     def _parse_to_rowdata(self, data: list) -> List[RowData]:
         return [RowData(row[0], row[1], row[2]) for row in data]
