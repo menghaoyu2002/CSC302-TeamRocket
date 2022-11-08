@@ -3,6 +3,7 @@ import "./App.css";
 import DataList from "./components/DataList";
 import GetDataForm from "./components/GetDataForm";
 import LineGraph from "./components/Graph";
+import { getRandomColor } from "./helpers/helpers";
 
 function App() {
   const [rowData, setRowData] = useState([]);
@@ -12,26 +13,25 @@ function App() {
     alert(error);
   };
 
-  const getRandomColor = () => {
-    var letters = "0123456789ABCDEF";
-    var color = "#";
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
-
+  /* Updates the all the data for the main graph */
   const updateAllData = (data) => {
+    // name for the most recently collected data
     const name = data ? data[0].name : null;
-
     setRowData(data);
 
-    if (name && !(name in allData)) {
-      setAllData((allData) =>
-        !allData.find((data) => data.name === name)
-          ? [...allData, { name: name, color: getRandomColor(), data: data }]
-          : allData
-      );
+    if (name) {
+      setAllData((allData) => {
+        if (allData.find((data) => data.name === name)) {
+          // do not change allData if the name is already there
+          return allData;
+        } else {
+          // otherwise add the data for that name
+          return [
+            ...allData,
+            { name: name, color: getRandomColor(), data: data },
+          ];
+        }
+      });
     }
   };
 
