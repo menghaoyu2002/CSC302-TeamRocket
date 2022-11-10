@@ -1,13 +1,18 @@
-import { useState } from 'react';
-import axios from '../axios';
+import { useState } from "react";
+import axios from "../axios";
 
-export default function GetDataForm({ setData, setError }) {
-  const [name, setName] = useState('');
+export default function GetDataForm({ data, setData, setError }) {
+  const [name, setName] = useState("");
   const [startYear, setStartYear] = useState(new Date().getFullYear());
   const [endYear, setEndYear] = useState(new Date().getFullYear());
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (data.find((dataSet) => dataSet.name === name)) {
+      return;
+    }
+
     // TODO: change endpoint to getDataByNameAndYearRange
     await axios
       .get(`/data/${name}`)
@@ -21,38 +26,36 @@ export default function GetDataForm({ setData, setError }) {
         if (error.response) {
           setError(error.response.data.error.msg);
         } else {
-          setError('Something went wrong...');
+          setError(`Something went wrong: ${error}`);
         }
       });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name: </label>
+      <label htmlFor='name'>Name: </label>
       <input
-        type="text"
-        name="name"
-        id="name"
+        type='text'
+        name='name'
+        id='name'
         required={true}
         onChange={(e) => setName(e.target.value)}
       ></input>
-      <label htmlFor="start-year">Start Year: </label>
+      <label htmlFor='start-year'>Start Year: </label>
       <input
-        type="number"
-        name="start-year"
-        id="start-year"
-        required={true}
+        type='number'
+        name='start-year'
+        id='start-year'
         onChange={(e) => setStartYear(parseInt(e.target.value))}
       ></input>
-      <label htmlFor="end-year">End Year: </label>
+      <label htmlFor='end-year'>End Year: </label>
       <input
-        type="number"
-        name="end-year"
-        id="end-year"
-        required={true}
+        type='number'
+        name='end-year'
+        id='end-year'
         onChange={(e) => setEndYear(parseInt(e.target.value))}
       ></input>
-      <input type="submit" value="Submit"></input>
+      <input type='submit' value='Submit'></input>
     </form>
   );
 }
