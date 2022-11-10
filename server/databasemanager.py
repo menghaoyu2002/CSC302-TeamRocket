@@ -114,7 +114,10 @@ class DatabaseManager:
 
         return self._parse_to_rowdata(result)
 
-    def get_data_by_name_and_year_range(self, name: str, start_year: float, end_year: float) -> List[RowData]:
+    def get_data_by_name_and_year_range(self,
+        name: str,
+        start_year: float,
+        end_year: float) -> List[RowData]:
         """
         Return a list of RowData objects such that:
         for every RowData in the list,
@@ -129,7 +132,9 @@ class DatabaseManager:
 
         return self._parse_to_rowdata(result)
 
-    def get_data_from_year_range(self, start_year: int, end_year: int) -> List[RowData]:
+    def get_data_from_year_range(self,
+        start_year: int,
+        end_year: int) -> List[RowData]:
         """Returns a list of RowData from start_year to end_year"""
 
         cur = self.connection.cursor()
@@ -141,4 +146,8 @@ class DatabaseManager:
         return self._parse_to_rowdata(result)
 
     def _parse_to_rowdata(self, data: list) -> List[RowData]:
+        """
+        Internal function that parses the result from executing a
+        db query to a list of RowData objects
+        """
         return [RowData(row[0], row[1], row[2]) for row in data]
