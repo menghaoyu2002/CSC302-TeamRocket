@@ -1,13 +1,18 @@
 import { useState } from "react";
 import axios from "../axios";
 
-export default function GetDataForm({ setData, setError }) {
+export default function GetDataForm({ data, setData, setError }) {
   const [name, setName] = useState("");
   const [startYear, setStartYear] = useState(new Date().getFullYear());
   const [endYear, setEndYear] = useState(new Date().getFullYear());
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (data.find((dataSet) => dataSet.name === name)) {
+      return;
+    }
+
     // TODO: change endpoint to getDataByNameAndYearRange
     await axios
       .get(`/data/${name}`)
