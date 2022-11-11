@@ -92,7 +92,6 @@ def get_by_year_range():
             }
         }, 500
 
-
 @data_blueprint.route("/<string:name>/years", methods=["GET"])
 def get_undernourishment_by_name_and_year_range(name: str):
     """
@@ -132,6 +131,20 @@ def get_undernourishment_by_name_and_year_range(name: str):
 
         # Return tuple where second element is the error code, and the first element is a
         # dictionary with the key 'data" with corresponding data list
+		except Error as error:
+        return {
+            'error': {
+                'msg': f'Error fetching data: {error}'
+            }
+        }, 500
+
+@data_blueprint.route('/names', methods=['GET'])
+def get_all_names():
+    """Return a list of all entity names"""
+    try:
+        db_manager = DatabaseManager(current_app.config['DATABASE'])
+        data = db_manager.get_all_names()
+        db_manager.close_connection()
         return {'data': data}, 200
     except Error as error:
         return {

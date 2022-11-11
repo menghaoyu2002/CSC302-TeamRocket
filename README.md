@@ -11,7 +11,7 @@ Documentation can be found in our [Github Wiki](https://github.com/menghaoyu2002
 
 ## Meeting Notes
 
-Meeting notes can be found in our [meeting-notes folder](https://github.com/menghaoyu2002/CSC302-TeamRocket/tree/main/meeting-notes)
+Meeting notes and postmortems can be found in our [meeting-notes folder](https://github.com/menghaoyu2002/CSC302-TeamRocket/tree/main/meeting-notes)
 
 ## Roadmap
 
@@ -45,10 +45,15 @@ Futhermore, when docker is installed, elevated permissions are required to run a
 
 ### **Installing Dependencies**
 
+NOTE: only run one of the commands, not both.
+
 This script installs docker and all our dependencies.
 
 ```bash
 su -c './scripts/install.sh'
+
+# the recommended way if sudo is installed
+sudo ./scripts/install.sh
 ```
 
 ### **Building the Application**
@@ -57,6 +62,9 @@ This script builds our docker image.
 
 ```bash
 su -c 'docker compose build'
+
+# the recommended way if sudo is installed
+sudo docker compose build
 ```
 
 ### **Running the Application**
@@ -65,6 +73,9 @@ This script runs our docker container, i.e. the application.
 
 ```bash
 su -c 'docker compose up'
+
+# the recommended way if sudo is installed
+sudo docker compose up
 ```
 
 Then navigate to http://localhost:3000 to view the running application.
@@ -75,4 +86,7 @@ This script runs all our tests. NOTE: the application must be first built before
 
 ```bash
 su -c './scripts/test.sh'
+
+# the recommended way if sudo is installed
+sudo ./scripts/test.sh
 ```
