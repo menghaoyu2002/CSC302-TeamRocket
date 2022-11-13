@@ -1,0 +1,11 @@
+.removeButton {
+  border: none;
+  border-radius: 5px;
+  background: #e87272;
+  padding: 10px 15px;
+  color: white;
+}
+
+.removeButton:hover {
+  background: #942828;
+}

@@ -8,7 +8,7 @@ import {
   Legend,
   Tooltip,
   ResponsiveContainer,
-} from "recharts";
+} from 'recharts';
 
 export default function LineGraph({ data, onLegendClick }) {
   return (
@@ -18,13 +18,13 @@ export default function LineGraph({ data, onLegendClick }) {
         <XAxis dataKey='year' allowDuplicatedCategory={false} height={50}>
           <Label value='Year' position={"insideBottom"} />
         </XAxis>
-        <YAxis type='number' domain={[0, 100]}>
+        <YAxis type="number" domain={[0, 100]}>
           <Label
-            value='Undernourishment in % of Population'
+            value="Undernourishment in % of Population"
             angle={-90}
-            position={"insideLeft"}
+            position={'insideLeft'}
             style={{
-              textAnchor: "middle",
+              textAnchor: 'middle',
             }}
           />
         </YAxis>
@@ -33,8 +33,8 @@ export default function LineGraph({ data, onLegendClick }) {
         {data.map((line) => (
           <Line
             key={line.name}
-            type='monotone'
-            dataKey='undernourishment'
+            type="monotone"
+            dataKey="undernourishment"
             data={line.data}
             name={line.name}
             stroke={line.color}
