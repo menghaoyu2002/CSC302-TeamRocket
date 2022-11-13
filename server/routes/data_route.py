@@ -105,7 +105,7 @@ def get_undernourishment_by_name_and_year_range(name: str):
     if not start_year or not end_year or not name:
         return {
             'name year range error': {
-                'msg': 'valid parameters <name>, <from> and <to> are required in the query string'
+                'msg': 'valid parameters <name>, <from> and <to> are required in query string'
             }
         }, 400
 
@@ -113,7 +113,7 @@ def get_undernourishment_by_name_and_year_range(name: str):
     if not start_year.isdigit() or not end_year.isdigit() or not isinstance(name, str):
         return {
             'error': {
-                'msg': 'valid parameters <from> and <to> are required in query string'
+                'msg': 'valid parameters <name>, <from> and <to> are required in query string'
             }
         }, 400
 
@@ -129,7 +129,6 @@ def get_undernourishment_by_name_and_year_range(name: str):
         # Close connection to the database since it is no longer required
         db_manager.close_connection()
 
-        print("returning data") # DEBUG
         # Return a tuple of data and response code
         return {"data": data}, 200
 

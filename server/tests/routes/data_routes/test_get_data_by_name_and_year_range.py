@@ -3,10 +3,10 @@
 from tests.temp_database_setup import TempDatabaseSetup
 
 
-class TestGetByNameAndYear(TempDatabaseSetup):
+class TestGetByNameAndYearRange(TempDatabaseSetup):
     """
     A class that contains methods that test the implementation of method:
-    get_data_by_name_and_year()
+    get_data_by_name_and_year_range()
     """
 
     def test_get_data(self, client):
@@ -36,8 +36,7 @@ class TestGetByNameAndYear(TempDatabaseSetup):
         that isn't in the table.
         """
 
-        expected_error_message = "valid parameters <name>, <from> and <to> are required in the query string"
-        name = "Canadaa"
+        name = "Canadaa" # intentional typo
         start_date = 2001
         end_date = 2002
         res = client.get(f'/data/{name}/years?from={start_date}&to={end_date}')
@@ -86,7 +85,7 @@ class TestGetByNameAndYear(TempDatabaseSetup):
         name = "Canada"
         start_date = -1
         end_date = -1
-        expected_error_message = '<from> and <to> must be valid years (non-negative integers)'
+        expected_error_message = 'valid parameters <name>, <from> and <to> are required in query string'
         res = client.get(f'/data/{name}/years?from={start_date}&to={end_date}')
         error_message = res.get_json()['error']['msg']
 
@@ -98,7 +97,7 @@ class TestGetByNameAndYear(TempDatabaseSetup):
         name = "Canada"
         start_date = 'start'
         end_date = 'end'
-        expected_error_message = '<from> and <to> must be valid years (non-negative integers)'
+        expected_error_message = 'valid parameters <name>, <from> and <to> are required in query string'
         res = client.get(f'/data/{name}/years?from={start_date}&to={end_date}')
         error_message = res.get_json()['error']['msg']
 
@@ -110,7 +109,7 @@ class TestGetByNameAndYear(TempDatabaseSetup):
         name = "Canada"
         start_date = 2000.1
         end_date = 2002.1
-        expected_error_message = '<from> and <to> must be valid years (non-negative integers)'
+        expected_error_message = 'valid parameters <name>, <from> and <to> are required in query string'
         res = client.get(f'/data/{name}/years?from={start_date}&to={end_date}')
         error_message = res.get_json()['error']['msg']
 
