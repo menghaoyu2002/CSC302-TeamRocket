@@ -24,6 +24,13 @@ function App() {
     ]);
   };
 
+  const removeCountryByName = (name) => {
+    setAllData((allData) =>
+      allData.filter((data) => data.name.toLowerCase() !== name.toLowerCase())
+    );
+    setSelectedCountry('');
+  };
+
   const onLegendClick = (event) => {
     const name = event.value;
     if (name) {
@@ -40,7 +47,10 @@ function App() {
         setData={updateAllData}
         setError={setError}
       ></GetDataForm>
-      <PieChartDrawer countryName={selectedCountry}></PieChartDrawer>
+      <PieChartDrawer
+        countryName={selectedCountry}
+        removeCountry={() => removeCountryByName(selectedCountry)}
+      ></PieChartDrawer>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import PieChartComponent from './PieChart';
 import { capitalizeFirstLetter } from '../helpers/helpers';
 import '../styles/PieChartDrawer.css';
 
-export default function PieChartDrawer({ countryName }) {
+export default function PieChartDrawer({ countryName, removeCountry }) {
   let drawerBody = <></>;
 
   if (countryName) {
@@ -12,7 +12,9 @@ export default function PieChartDrawer({ countryName }) {
           Average Undernourishment for {capitalizeFirstLetter(countryName)}
         </h1>
         <PieChartComponent countryName={countryName}></PieChartComponent>
-        <button className="removeButton">Remove</button>
+        <button className="removeButton" onClick={removeCountry}>
+          Remove
+        </button>
       </>
     );
   }
