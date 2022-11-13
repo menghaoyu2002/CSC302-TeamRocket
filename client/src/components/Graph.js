@@ -12,11 +12,11 @@ import {
 
 export default function LineGraph({ data, onLegendClick }) {
   return (
-    <ResponsiveContainer width="100%" height="100%" minHeight={400}>
-      <LineChart width={400} height={400} style={{ margin: '20px' }}>
-        <CartesianGrid stroke="#ccc" />
-        <XAxis dataKey="year" allowDuplicatedCategory={false} height={50}>
-          <Label value="Year" position={'insideBottom'} />
+    <ResponsiveContainer width='100%' height='100%' minHeight={400}>
+      <LineChart>
+        <CartesianGrid stroke='#ccc' />
+        <XAxis dataKey='year' allowDuplicatedCategory={false} height={50}>
+          <Label value='Year' position={"insideBottom"} />
         </XAxis>
         <YAxis type="number" domain={[0, 100]}>
           <Label

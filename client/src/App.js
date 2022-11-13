@@ -41,7 +41,14 @@ function App() {
 
   return (
     <div className="App">
-      <LineGraph data={allData} onLegendClick={onLegendClick}></LineGraph>
+      <div className='MainGraphContainer'>
+        <h2>Undernourishment vs Time</h2>
+        <LineGraph
+          className='MainGraph'
+          data={allData}
+          onLegendClick={onLegendClick}
+        ></LineGraph>
+      </div>
       <GetDataForm
         data={allData}
         setData={updateAllData}
