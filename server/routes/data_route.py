@@ -131,7 +131,7 @@ def get_undernourishment_by_name_and_year_range(name: str):
 
         # Return tuple where second element is the error code, and the first element is a
         # dictionary with the key 'data" with corresponding data list
-		except Error as error:
+    except Error as error:
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
