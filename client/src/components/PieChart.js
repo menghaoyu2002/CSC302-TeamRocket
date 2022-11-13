@@ -1,11 +1,9 @@
 import { PieChart, Pie, Tooltip } from 'recharts';
 import { useEffect, useState } from 'react';
 import axios from '../axios';
-import { capitalizeFirstLetter } from '../helpers/helpers';
 
 const style = {
   margin: 'auto',
-  width: '50%',
 };
 
 const redText = {
@@ -40,7 +38,6 @@ export default function PieChartComponent({ countryName }) {
   }, [countryName]);
   return (
     <div>
-      <h1>Average Undernourishment for {capitalizeFirstLetter(countryName)}</h1>
       <PieChart width={730} style={style} height={250}>
         <Pie
           data={data}
