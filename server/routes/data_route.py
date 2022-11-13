@@ -104,7 +104,7 @@ def get_undernourishment_by_name_and_year_range(name: str):
     # Check that start_year and end_year were provided in the request.
     if not start_year or not end_year or not name:
         return {
-            'name year range error': {
+            'error': {
                 'msg': 'valid parameters <name>, <from> and <to> are required in query string'
             }
         }, 400
