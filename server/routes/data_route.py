@@ -84,14 +84,62 @@ def get_by_year_range():
         db_manager = DatabaseManager(current_app.config['DATABASE'])
         data = db_manager.get_data_from_year_range(start_year, end_year)
         db_manager.close_connection()
-        return {'data': data}, 200
     except Error as error:
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
             }
         }, 500
+    return {'data': data}, 200
 
+@data_blueprint.route("/<string:name>/years", methods=["GET"])
+def get_undernourishment_by_name_and_year_range(name: str):
+    """
+    Return data with name between the years start_year and end_year.
+    """
+
+    start_year = request.args.get('from')
+    end_year = request.args.get('to')
+
+    # Check that start_year and end_year were provided in the request.
+    if not start_year or not end_year or not name:
+        return {
+            'error': {
+                'msg': 'valid parameters <name>, <from> and <to> are required in query string'
+            }
+        }, 400
+
+    # Check that start_year and end_year both consist of numbers only
+    if not start_year.isdigit() or not end_year.isdigit() or not isinstance(name, str):
+        return {
+            'error': {
+                'msg': 'valid parameters <name>, <from> and <to> are required in query string'
+            }
+        }, 400
+
+    # # Attempt to return data from the sqlite database
+    # # The second element in the tuple is the error code
+    try:
+        db_manager = DatabaseManager(current_app.config['DATABASE'])
+
+        # Return a list of n-tuples where each n-tuple corresponds to a row in the database
+        data = db_manager.get_data_by_name_and_year_range(
+            name.lower(), start_year, end_year)
+
+        # Close connection to the database since it is no longer required
+        db_manager.close_connection()
+
+        # Return a tuple of data and response code
+        return {"data": data}, 200
+
+        # Return tuple where second element is the error code, and the first element is a
+        # dictionary with the key 'data" with corresponding data list
+    except Error as error:
+        return {
+            'error': {
+                'msg': f'Error fetching data: {error}'
+            }
+        }, 500
 
 @data_blueprint.route('/names', methods=['GET'])
 def get_all_names():
