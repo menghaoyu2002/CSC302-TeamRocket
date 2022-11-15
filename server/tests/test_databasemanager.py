@@ -54,7 +54,7 @@ class TestDatabaseManager:
 
         try:
             print("Beginning tests for method get_data_by_name_and_year()...")
-            test_result = self.db_manager.get_data_by_name_and_year_range("Canada", 2001)
+            test_result = self.db_manager.get_data_by_name_and_year_range("Canada", 2001, 2001)
             assert test_result[2] == 2.5
         except Error:
             print("Exception raised when testing method: get_data_by_name_and_year.")

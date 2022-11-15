@@ -22,7 +22,7 @@ class TestGetByNameAndYearRange(TempDatabaseSetup):
         expected_value = 2.5
 
         res = client.get(f'/data/{name}/years?from={start_date}&to={end_date}')
-        
+
         # return a dictionary with key "data" and value a list of entries, then get the list
         data = res.get_json()["data"]
 
@@ -46,7 +46,7 @@ class TestGetByNameAndYearRange(TempDatabaseSetup):
         assert data['data'] == [] # empty list because no data
         assert res.status_code == 200 # No crashing
 
-    # Remaining tests are the same as those in test_get_by_year_range()
+    # Remaining tests are similar as those in test_get_by_year_range()
     def test_valid_year_range(self, client):
         """Test that the endpoint returns correct data when given a valid year range"""
         name = "Canada"
@@ -55,10 +55,11 @@ class TestGetByNameAndYearRange(TempDatabaseSetup):
         res = client.get(f'/data/{name}/years?from={start_date}&to={end_date}')
         data = res.get_json()['data']
 
+        # No crashing
         assert res.status_code == 200
-        for row in data:
-            assert row['year'] >= start_date
-            assert row['year'] <= end_date
+        for row_data in data:
+            assert row_data['year'] >= start_date
+            assert row_data['year'] <= end_date
 
     def test_single_year_range(self, client):
         """Test that endpoint returns correct data given same value"""
