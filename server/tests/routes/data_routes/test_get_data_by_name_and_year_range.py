@@ -58,7 +58,7 @@ class TestGetByNameAndYearRange(TempDatabaseSetup):
         res = client.get(f'/data/{name}/years?from={start_date}&to={end_date}')
         data = res.get_json()['data']
 
-        assert res.status_code == 200 # No crashing the server
+        assert res.status_code == 200  # No crashing the server
         for row_data in data:
             assert row_data['year'] >= start_date
             assert row_data['year'] <= end_date
