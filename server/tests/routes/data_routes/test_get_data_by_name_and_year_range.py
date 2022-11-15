@@ -2,6 +2,7 @@
 
 from tests.temp_database_setup import TempDatabaseSetup
 
+
 class TestGetByNameAndYearRange(TempDatabaseSetup):
     """
     A class that contains methods that test the implementation of method:
@@ -37,18 +38,20 @@ class TestGetByNameAndYearRange(TempDatabaseSetup):
         Test that the endpoint doesn't crash with an invalid name that isn't in the table.
         """
 
-        name = "Canadaa" # intentional typo
+        name = "Canadaa"  # intentional typo
         start_date = 2001
         end_date = 2002
         res = client.get(f'/data/{name}/years?from={start_date}&to={end_date}')
         data = res.get_json()
 
-        assert data['data'] == [] # empty list because no data
-        assert res.status_code == 200 # No crashing
+        assert data['data'] == []  # empty list because no data
+        assert res.status_code == 200  # No crashing
 
     # Remaining tests are similar as those in test_get_by_year_range()
     def test_valid_year_range(self, client):
-        """Test that the endpoint returns correct data when given a valid year range"""
+        """
+        Test endpoint returns correct data when given valid year range
+        """
         name = "Canada"
         start_date = 2001
         end_date = 2002
@@ -62,7 +65,9 @@ class TestGetByNameAndYearRange(TempDatabaseSetup):
             assert row_data['year'] <= end_date
 
     def test_single_year_range(self, client):
-        """Test that endpoint returns correct data given same value"""
+        """
+        Test endpoint returns correct data given same value
+        """
         name = "Canada"
         start_date = 2001
         res = client.get(
