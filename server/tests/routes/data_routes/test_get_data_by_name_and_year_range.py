@@ -40,8 +40,10 @@ class TestGetByNameAndYearRange(TempDatabaseSetup):
         start_date = 2001
         end_date = 2002
         res = client.get(f'/data/{name}/years?from={start_date}&to={end_date}')
+        data = res.get_json()
 
-        assert res.status_code == 500
+        assert data['data'] == [] # empty list because no data 
+        assert res.status_code == 200 # No crashing
 
     # Remaining tests are the same as those in test_get_by_year_range()
     def test_valid_year_range(self, client):
