@@ -124,11 +124,12 @@ class DatabaseManager:
         RowData.name = name,
         and RowData.year is between start_year and end_year
         """
-        
+
         params = (name, start_year, end_year)
         cur = self.connection.cursor()
         print("About to query database") # DEBUG
-        query = f"SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_ENTITY}=? AND ({Table.COLUMN_YEAR} BETWEEN ? AND ?) ORDER BY year"
+        query = f"SELECT * FROM {Table.NAME} WHERE {Table.COLUMN_ENTITY}=? AND "\
+        + f"({Table.COLUMN_YEAR} BETWEEN ? AND ?) ORDER BY year"
         result = cur.execute(query, params).fetchall()
         cur.close()
 

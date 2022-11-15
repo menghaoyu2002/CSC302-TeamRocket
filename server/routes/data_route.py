@@ -140,7 +140,6 @@ def get_undernourishment_by_name_and_year_range(name: str):
                 'msg': f'Error fetching data: {error}'
             }
         }, 500
-        
 
 @data_blueprint.route('/names', methods=['GET'])
 def get_all_names():
