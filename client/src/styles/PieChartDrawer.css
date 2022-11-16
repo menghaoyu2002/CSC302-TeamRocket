@@ -8,4 +8,5 @@
 
 .removeButton:hover {
   background: #942828;
+  cursor: pointer;
 }
