@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+import { render, screen } from '@testing-library/react';
+import App from './App';
 
 const { ResizeObserver } = window;
 
@@ -17,8 +17,8 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-test("renders input labels", () => {
+test('renders input labels', () => {
   render(<App />);
-  const linkElement = screen.getByText("Name:");
+  const linkElement = screen.getByText('Country Name:');
   expect(linkElement).toBeInTheDocument();
 });
