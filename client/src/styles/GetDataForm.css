@@ -50,6 +50,17 @@ label {
   justify-content: center;
 }
 
+.suggestion {
+  padding: 3px;
+}
+
+.suggestion:hover {
+  background: #f2f7fa;
+  text-decoration: underline;
+  cursor: pointer;
+  border-radius: 5px 5px;
+}
+
 input[type='text'] {
   position: relative;
 }

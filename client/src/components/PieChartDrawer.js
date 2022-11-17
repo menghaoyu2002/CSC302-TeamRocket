@@ -16,5 +16,5 @@ export default function PieChartDrawer({ countryName, removeCountry }) {
       </>
     );
   }
-  return <div style={{ padding: '4rem' }}>{drawerBody}</div>;
+  return <div style={{ paddingBottom: '5rem' }}>{drawerBody}</div>;
 }

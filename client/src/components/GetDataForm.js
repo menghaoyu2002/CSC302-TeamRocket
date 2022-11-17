@@ -56,7 +56,7 @@ export default function GetDataForm({ data, setData, setError }) {
 
     setNameSuggestions(
       nameCandidates.map((name) => (
-        <li key={name} onClick={() => setName(name)}>
+        <li className="suggestion" key={name} onClick={() => setName(name)}>
           {toTitleCase(name)}
         </li>
       ))
