@@ -1,0 +1,41 @@
+input {
+  margin-right: 2rem;
+  padding: 8px;
+}
+
+input[type='submit'] {
+  height: 2.5rem;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+label {
+  margin: 5px;
+}
+
+.nameField {
+  display: flex;
+}
+
+.suggestions {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin-right: 2rem;
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.suggestionsContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input[type='text'] {
+  position: relative;
+}
