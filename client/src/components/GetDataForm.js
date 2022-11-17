@@ -51,7 +51,7 @@ export default function GetDataForm({ data, setData, setError }) {
     const nameCandidates = countryNames.filter(
       (name) =>
         e.target.value !== '' &&
-        name.toLowerCase().startsWith(e.target.value.toLowerCase())
+        name.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
     setNameSuggestions(

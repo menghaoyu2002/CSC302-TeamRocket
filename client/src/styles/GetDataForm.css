@@ -4,7 +4,7 @@ input {
 }
 
 input[type='submit'] {
-  height: 2.5rem;
+  height: 2.1rem;
 }
 
 form {
@@ -25,6 +25,7 @@ label {
   text-align: center;
   padding: 0;
   margin-right: 2rem;
+  width: 10rem;
   height: 100px;
   overflow-y: scroll;
 }
