@@ -1,13 +1,25 @@
 input {
   margin-right: 2rem;
-  padding: 8px;
+  margin-left: 0.5rem;
+  padding: 10px;
+  border: solid 2px #b4bcc2;
+  border-radius: 5px 5px;
 }
 
 input[type='submit'] {
   height: 2.1rem;
+  border: solid 2px #5fb2e8;
+  border-radius: 5px 5px;
+  background: #1879b8;
+  color: white;
+}
+
+input[type='submit']:hover {
+  background: #5fb2e8;
 }
 
 form {
+  padding-top: 2rem;
   display: flex;
   justify-content: center;
 }

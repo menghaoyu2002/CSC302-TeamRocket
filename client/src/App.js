@@ -49,7 +49,7 @@ function App() {
   return (
     <div className="App">
       <div className="MainGraphContainer">
-        <h2>Undernourishment vs Time</h2>
+        <h1>Undernourishment vs Time</h1>
         <LineGraph
           className="MainGraph"
           data={allData}

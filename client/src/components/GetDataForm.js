@@ -66,7 +66,7 @@ export default function GetDataForm({ data, setData, setError }) {
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
       <div className="nameField">
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Country Name:</label>
         <div className="suggestionsContainer">
           <input
             type="text"
@@ -75,6 +75,7 @@ export default function GetDataForm({ data, setData, setError }) {
             required={true}
             onChange={handleNameChange}
             value={name}
+            placeholder="start typing a name..."
           />
           <ul className="suggestions">{nameSuggestions}</ul>
         </div>
