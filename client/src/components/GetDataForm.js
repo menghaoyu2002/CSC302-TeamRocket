@@ -65,7 +65,7 @@ export default function GetDataForm({ data, setData, setError }) {
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
-      <div className="nameField">
+      <div>
         <label htmlFor="name">Country Name:</label>
         <div className="suggestionsContainer">
           <input

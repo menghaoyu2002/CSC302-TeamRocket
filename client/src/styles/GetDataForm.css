@@ -7,6 +7,7 @@ input {
 }
 
 input[type='submit'] {
+  display: inline;
   height: 2.5rem;
   border: solid 2px #5fb2e8;
   border-radius: 5px 5px;
@@ -29,10 +30,6 @@ label {
   margin: 5px;
 }
 
-.nameField {
-  display: flex;
-}
-
 .suggestions {
   list-style: none;
   text-align: center;
@@ -44,7 +41,7 @@ label {
 }
 
 .suggestionsContainer {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -63,4 +60,10 @@ label {
 
 input[type='text'] {
   position: relative;
+}
+
+@media only screen and (max-width: 1200px) {
+  input[type='submit'] {
+    margin-top: 1rem;
+  }
 }
