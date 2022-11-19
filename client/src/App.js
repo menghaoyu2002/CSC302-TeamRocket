@@ -34,17 +34,24 @@ function App() {
   const onLegendClick = (event) => {
     const name = event.value;
     if (name) {
-      // setAllData((allData) => allData.filter((data) => data.name !== name));
       setSelectedCountry(name);
+      setTimeout(
+        () =>
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth',
+          }),
+        10
+      );
     }
   };
 
   return (
     <div className="App">
-      <div className='MainGraphContainer'>
-        <h2>Undernourishment vs Time</h2>
+      <div className="MainGraphContainer">
+        <h1>Undernourishment vs Time</h1>
         <LineGraph
-          className='MainGraph'
+          className="MainGraph"
           data={allData}
           onLegendClick={onLegendClick}
         ></LineGraph>

@@ -11,3 +11,7 @@ export const getRandomColor = () => {
 export function capitalizeFirstLetter(string) {
   return string.toLowerCase().charAt(0).toUpperCase() + string.slice(1);
 }
+
+export function toTitleCase(str) {
+  return str.replace(/\w\S*/g, capitalizeFirstLetter);
+}

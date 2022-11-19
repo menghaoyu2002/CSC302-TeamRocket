@@ -9,6 +9,7 @@ const style = {
 const redText = {
   color: 'red',
 };
+
 export default function PieChartComponent({ countryName }) {
   const [data, setData] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');

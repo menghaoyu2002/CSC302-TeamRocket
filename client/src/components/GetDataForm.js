@@ -1,10 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { toTitleCase } from '../helpers/helpers';
 import axios from '../axios';
+import '../styles/GetDataForm.css';
 
 export default function GetDataForm({ data, setData, setError }) {
   const [name, setName] = useState('');
   const [startYear, setStartYear] = useState(new Date().getFullYear());
   const [endYear, setEndYear] = useState(new Date().getFullYear());
+  const [countryNames, setCountryNames] = useState([]);
+  const [nameSuggestions, setNameSuggestions] = useState([]);
+
+  useEffect(() => {
+    axios.get('/data/names').then((res) => {
+      if (res.status === 200) {
+        setCountryNames(res.data.data);
+      }
+    });
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,31 +45,60 @@ export default function GetDataForm({ data, setData, setError }) {
       });
   };
 
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+
+    const nameCandidates = countryNames.filter(
+      (name) =>
+        e.target.value !== '' &&
+        name.toLowerCase().startsWith(e.target.value.toLowerCase())
+    );
+
+    setNameSuggestions(
+      nameCandidates.map((name) => (
+        <li className="suggestion" key={name} onClick={() => setName(name)}>
+          {toTitleCase(name)}
+        </li>
+      ))
+    );
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name: </label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        required={true}
-        onChange={(e) => setName(e.target.value)}
-      ></input>
-      <label htmlFor="start-year">Start Year: </label>
-      <input
-        type="number"
-        name="start-year"
-        id="start-year"
-        onChange={(e) => setStartYear(parseInt(e.target.value))}
-      ></input>
-      <label htmlFor="end-year">End Year: </label>
-      <input
-        type="number"
-        name="end-year"
-        id="end-year"
-        onChange={(e) => setEndYear(parseInt(e.target.value))}
-      ></input>
-      <input type="submit" value="Submit"></input>
+    <form onSubmit={handleSubmit} autoComplete="off">
+      <div>
+        <label htmlFor="name">Country Name:</label>
+        <div className="suggestionsContainer">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            required={true}
+            onChange={handleNameChange}
+            value={name}
+            placeholder="start typing a name..."
+          />
+          <ul className="suggestions">{nameSuggestions}</ul>
+        </div>
+      </div>
+      <div>
+        <label htmlFor="start-year">Start Year: </label>
+        <input
+          type="number"
+          name="start-year"
+          id="start-year"
+          onChange={(e) => setStartYear(parseInt(e.target.value))}
+        />
+      </div>
+      <div>
+        <label htmlFor="end-year">End Year: </label>
+        <input
+          type="number"
+          name="end-year"
+          id="end-year"
+          onChange={(e) => setEndYear(parseInt(e.target.value))}
+        />
+      </div>
+      <input type="submit" value="Add Country"></input>
     </form>
   );
 }
