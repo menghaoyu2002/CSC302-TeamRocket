@@ -65,7 +65,6 @@ def get_by_year_range():
     """Return all data between the years start_year and end_year"""
     start_year = request.args.get('from')
     end_year = request.args.get('to')
-
     if not start_year or not end_year:
         return {
             'error': {
