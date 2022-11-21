@@ -54,7 +54,9 @@ test('renders with country in legend when given data', () => {
   ];
   render(<LineGraph data={data} />);
 
-  const countryName = screen.getByTestId('legend');
+  setTimeout(() => {
+    const countryName = screen.getByTestId('legend');
 
-  setTimeout(() => expect(countryName).toBeInTheDocument(), 1000);
+    expect(countryName).toBeInTheDocument();
+  }, 10);
 });
