@@ -45,6 +45,8 @@ class DatabaseManager:
         Assume the dataset is a csv of the form: Country, Country-code, year, prevalence.
         """
         if self.table_exists():
+            logging.getLogger().info(
+                'Dataset table already exists. Dataset will not be imported again.')
             return  # Table already exists, no need to import again
 
         logging.getLogger().info('IMPORTING DATASET')
