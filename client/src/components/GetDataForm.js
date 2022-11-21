@@ -76,6 +76,7 @@ export default function GetDataForm({ data, setData, setError }) {
             onChange={handleNameChange}
             value={name}
             placeholder="start typing a name..."
+            data-testid="name"
           />
           <ul className="suggestions">{nameSuggestions}</ul>
         </div>
@@ -87,6 +88,7 @@ export default function GetDataForm({ data, setData, setError }) {
           name="start-year"
           id="start-year"
           onChange={(e) => setStartYear(parseInt(e.target.value))}
+          data-testid="start-year"
         />
       </div>
       <div>
@@ -96,9 +98,14 @@ export default function GetDataForm({ data, setData, setError }) {
           name="end-year"
           id="end-year"
           onChange={(e) => setEndYear(parseInt(e.target.value))}
+          data-testid="end-year"
         />
       </div>
-      <input type="submit" value="Add Country"></input>
+      <input
+        type="submit"
+        value="Add Country"
+        data-testid="add-country"
+      ></input>
     </form>
   );
 }

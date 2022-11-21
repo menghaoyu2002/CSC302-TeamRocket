@@ -1,5 +1,18 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
+
+jest.mock('recharts', () => {
+  const OriginalModule = jest.requireActual('recharts');
+
+  return {
+    ...OriginalModule,
+    ResponsiveContainer: ({ height, children }) => (
+      <OriginalModule.ResponsiveContainer width={800} height={height}>
+        {children}
+      </OriginalModule.ResponsiveContainer>
+    ),
+  };
+});
 
 const { ResizeObserver } = window;
 
@@ -19,6 +32,11 @@ afterEach(() => {
 
 test('renders input labels', () => {
   render(<App />);
-  const linkElement = screen.getByText('Country Name:');
-  expect(linkElement).toBeInTheDocument();
+  const countryNameLabel = screen.getByText('Country Name:');
+  const startYearLabel = screen.getByText('Start Year:');
+  const endYearLabel = screen.getByText('End Year:');
+
+  expect(countryNameLabel).toBeInTheDocument();
+  expect(startYearLabel).toBeInTheDocument();
+  expect(endYearLabel).toBeInTheDocument();
 });
