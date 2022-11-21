@@ -10,11 +10,11 @@ apt_install () {
   apt-get update
 
   echo 'installing docker dependencies...'
-  
+
   if ! apt-get install ca-certificates curl gnupg lsb-release; then
     echo 'docker dependencies could not be installed.'
     echo_report_error_message
-  fi 
+  fi
 
   echo 'installing docker engine'
   {
@@ -39,7 +39,7 @@ dnf_install() {
   {
     dnf -y install dnf-plugins-core
     dnf config-manager --add-repo $REPO_LINK
-    dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin 
+    dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
   } || {
     echo 'docker engine could not be installed'
     echo_report_error_message
@@ -102,19 +102,19 @@ install() {
     GPG_LINK="https://download.docker.com/linux/ubuntu/gpg"
     REPO_LINK="https://download.docker.com/linux/ubuntu"
     install
-  elif [ "$OS" = "Debian" ]; then 
+  elif [ "$OS" = "Debian" ]; then
     GPG_LINK="https://download.docker.com/linux/debian/gpg"
     REPO_LINK="https://download.docker.com/linux/debian"
     install
   elif [ "$OS" = "Fedora" ]; then
     REPO_LINK="https://download.docker.com/linux/fedora/docker-ce.repo"
     install
-  elif [ "$OS" = "CentOS" ]; then 
+  elif [ "$OS" = "CentOS" ]; then
     REPO_LINK="https://download.docker.com/linux/centos/docker-ce.repo"
     install
-  else 
+  else
       echo 'Your version of linux is not yet supported.'
-      echo 'Please manually install docker from https://docs.docker.com/engine/install/' 
+      echo 'Please manually install docker from https://docs.docker.com/engine/install/'
       exit 1
   fi
 
@@ -131,7 +131,7 @@ install() {
   }
   echo 'docker has been started.'
 
-  echo 'verifying docker installation...' 
+  echo 'verifying docker installation...'
   {
     docker run hello-world
   } || {
@@ -140,4 +140,4 @@ install() {
   }
 
   echo 'docker has been installed.'
-) 2>&1 | tee ./scripts/install_logs.txt
+) 2>&1 | tee ./scripts/install_logs.log
