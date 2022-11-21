@@ -8,7 +8,7 @@ from flask_cors import CORS
 from constants import DATASET_PATH, DEFAULT_DATABASE
 from databasemanager import DatabaseManager
 from routes.data_route import data_blueprint
-from routes.logging import logging_blueprint
+from routes.logging_route import logging_blueprint
 
 
 def create_app(test_config=None):
@@ -21,7 +21,6 @@ def create_app(test_config=None):
     app.logger = logging.getLogger()
     app.logger.handlers.extend(gunicorn_error_logger.handlers)
     app.logger.setLevel(gunicorn_error_logger.level)
-
 
     CORS(app)
     app.config.from_mapping(

@@ -4,7 +4,6 @@ import time
 from typing import Tuple, List
 from flask import Blueprint, current_app, g, request
 
-
 logging_blueprint = Blueprint("logger", __name__)
 
 
