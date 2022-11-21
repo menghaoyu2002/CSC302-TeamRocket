@@ -2,6 +2,7 @@
 the database."""
 
 import sqlite3
+import logging
 from dataclasses import dataclass
 from typing import List, Optional
 from flask import current_app
@@ -31,12 +32,12 @@ class DatabaseManager:
         """Opens a connection to the SQLite database."""
         self.connection = sqlite3.connect(
             self.database, check_same_thread=False)
-        current_app.logger.info('connected to database')
+        logging.getLogger().info('connected to database')
 
     def close_connection(self) -> None:
         """Close the Connection to the database"""
         self.connection.close()
-        current_app.logger.info('connection to database closed.')
+        logging.getLogger().info('connection to database closed.')
 
     def import_dataset(self, path: str) -> None:
         """Imports dataset specified by path and adds it to self.database if it doesn't already
@@ -47,7 +48,7 @@ class DatabaseManager:
         if self.table_exists():
             return  # Table already exists, no need to import again
 
-        current_app.logger.info('IMPORTING DATASET')
+        logging.getLogger().info('IMPORTING DATASET')
         dataframe = self._read_dataset(path)
 
         dataframe.to_sql(Table.NAME, self.connection, index=False)
@@ -74,7 +75,7 @@ class DatabaseManager:
         """
         Read the dataset into a pandas dataframe
         """
-        current_app.logger.info('READING DATASET')
+        logging.getLogger().info('READING DATASET')
         dataframe = pd.read_csv(path,
                                 header=0,
                                 usecols=[0, 2, 3],

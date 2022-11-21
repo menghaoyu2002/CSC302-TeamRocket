@@ -35,11 +35,10 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
 
     try:
-        with app.app_context():
-            db_manager = DatabaseManager(app.config['DATABASE'])
-            path = Path(__file__).parent / DATASET_PATH
-            db_manager.import_dataset(path)
-            db_manager.close_connection()
+        db_manager = DatabaseManager(app.config['DATABASE'])
+        path = Path(__file__).parent / DATASET_PATH
+        db_manager.import_dataset(path)
+        db_manager.close_connection()
     except Error as error:
         app.logger.fatal(
             'UNABLE TO INITIALIZE DATABASE: error_message=%s traceback=%s',
