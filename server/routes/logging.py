@@ -29,7 +29,8 @@ def log_request_start():
         ('body', request.get_json(silent=True)),
     ]
 
-    current_app.logger.info('received request: ' + parse_tuples_to_line(log_params))
+    current_app.logger.info('received request: ' +
+                            parse_tuples_to_line(log_params))
 
 
 @logging_blueprint.after_app_request
@@ -67,6 +68,7 @@ def log_request_end(response):
 
 
 def parse_tuples_to_line(log_params: List[Tuple[str, any]]):
+    """Parse the log parameters into a string of key value pairs"""
     parts = []
     for name, value in log_params:
         parts.append(f"{name}={value}")
