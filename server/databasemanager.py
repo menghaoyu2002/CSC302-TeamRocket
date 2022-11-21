@@ -5,7 +5,6 @@ import sqlite3
 import logging
 from dataclasses import dataclass
 from typing import List, Optional
-from flask import current_app
 import pandas as pd
 from models.rowdata import RowData
 from constants import DEFAULT_DATABASE
