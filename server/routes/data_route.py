@@ -27,8 +27,10 @@ def get_undernourishment_by_name(name):
         return {'data': data}, 200
     except Error as error:
         current_app.logger.error(
-            f'DATABASE ERROR: error_message={error} args={error.args} \
-                traceback={traceback.format_exc()}')
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
 
         return {
             'error': {
@@ -46,8 +48,10 @@ def get_average_undernourishment_by_name(name):
         db_manager.close_connection()
     except Error as error:
         current_app.logger.error(
-            f'DATABASE ERROR: error_message={error} args={error.args} \
-                traceback={traceback.format_exc()}')
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
@@ -93,8 +97,10 @@ def get_by_year_range():
         db_manager.close_connection()
     except Error as error:
         current_app.logger.error(
-            f'DATABASE ERROR: error_message={error} args={error.args} \
-                traceback={traceback.format_exc()}')
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
@@ -147,8 +153,10 @@ def get_undernourishment_by_name_and_year_range(name: str):
         # dictionary with the key 'data" with corresponding data list
     except Error as error:
         current_app.logger.error(
-            f'DATABASE ERROR: error_message={error} args={error.args} \
-                traceback={traceback.format_exc()}')
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
@@ -166,8 +174,10 @@ def get_all_names():
         return {'data': data}, 200
     except Error as error:
         current_app.logger.error(
-            f'DATABASE ERROR: error_message={error} args={error.args} \
-                traceback={traceback.format_exc()}')
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
