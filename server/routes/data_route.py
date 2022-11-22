@@ -3,6 +3,7 @@ The API route handling database/data operations
 """
 
 from sqlite3 import Error
+import traceback
 from flask import Blueprint, current_app, request
 
 from databasemanager import DatabaseManager
@@ -25,6 +26,12 @@ def get_undernourishment_by_name(name):
             }, 404
         return {'data': data}, 200
     except Error as error:
+        current_app.logger.error(
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
+
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
@@ -40,6 +47,11 @@ def get_average_undernourishment_by_name(name):
         data = db_manager.get_data_by_name(name.lower())
         db_manager.close_connection()
     except Error as error:
+        current_app.logger.error(
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
@@ -65,7 +77,6 @@ def get_by_year_range():
     """Return all data between the years start_year and end_year"""
     start_year = request.args.get('from')
     end_year = request.args.get('to')
-
     if not start_year or not end_year:
         return {
             'error': {
@@ -85,6 +96,11 @@ def get_by_year_range():
         data = db_manager.get_data_from_year_range(start_year, end_year)
         db_manager.close_connection()
     except Error as error:
+        current_app.logger.error(
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
@@ -93,7 +109,7 @@ def get_by_year_range():
     return {'data': data}, 200
 
 
-@data_blueprint.route("/<string:name>/years", methods=["GET"])
+@ data_blueprint.route("/<string:name>/years", methods=["GET"])
 def get_undernourishment_by_name_and_year_range(name: str):
     """
     Return data with name between the years start_year and end_year.
@@ -136,6 +152,11 @@ def get_undernourishment_by_name_and_year_range(name: str):
         # Return tuple where second element is the error code, and the first element is a
         # dictionary with the key 'data" with corresponding data list
     except Error as error:
+        current_app.logger.error(
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
@@ -143,7 +164,7 @@ def get_undernourishment_by_name_and_year_range(name: str):
         }, 500
 
 
-@data_blueprint.route('/names', methods=['GET'])
+@ data_blueprint.route('/names', methods=['GET'])
 def get_all_names():
     """Return a list of all entity names"""
     try:
@@ -152,6 +173,11 @@ def get_all_names():
         db_manager.close_connection()
         return {'data': data}, 200
     except Error as error:
+        current_app.logger.error(
+            'DATABASE ERROR: error_message=%s traceback=%s',
+            error,
+            traceback.format_exc()
+        )
         return {
             'error': {
                 'msg': f'Error fetching data: {error}'
