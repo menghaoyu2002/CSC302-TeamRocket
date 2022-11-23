@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import App from '../App';
 import LineGraph from './Graph';
 
 jest.mock('recharts', () => {
@@ -14,19 +13,6 @@ jest.mock('recharts', () => {
     ),
   };
 });
-
-// jest.mock('./Graph', () => {
-//   const OriginalModule = jest.requireActual('./Graph');
-
-//   const data = [
-//     {
-//       name: 'world',
-//       color: '#000000',
-//       data: [{ name: 'world', year: 2001, undernourishment: 0.2 }],
-//     },
-//   ];
-//   return <OriginalModule.LineGraph data={data} />;
-// });
 
 const { ResizeObserver } = window;
 
@@ -45,18 +31,43 @@ afterEach(() => {
 });
 
 test('renders with country in legend when given data', () => {
+  const countryName = 'world';
+
   const data = [
     {
-      name: 'world',
+      name: countryName,
       color: '#000000',
-      data: [{ name: 'world', year: 2001, undernourishment: 0.2 }],
+      data: [{ name: countryName, year: 2001, undernourishment: 0.2 }],
     },
   ];
   render(<LineGraph data={data} />);
 
   setTimeout(() => {
-    const countryName = screen.getByTestId('legend');
+    const countryNameText = screen.getByText(countryName);
 
-    expect(countryName).toBeInTheDocument();
-  }, 10);
+    expect(countryNameText).toBeInTheDocument();
+  }, 1);
+});
+
+test('handles clicks on legend items', () => {
+  const countryName = 'world';
+
+  const data = [
+    {
+      name: countryName,
+      color: '#000000',
+      data: [{ name: countryName, year: 2001, undernourishment: 0.2 }],
+    },
+  ];
+
+  const mockOnLegendClick = jest.fn();
+
+  render(<LineGraph data={data} onLegendClick={mockOnLegendClick} />);
+
+  setTimeout(() => {
+    const countryNameText = screen.getByText(countryName);
+    countryNameText.click();
+
+    expect(mockOnLegendClick).toHaveBeenCalled();
+  }, 1);
 });

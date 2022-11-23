@@ -10,7 +10,11 @@ export default function PieChartDrawer({ countryName, removeCountry }) {
       <>
         <h1>Average Undernourishment for {toTitleCase(countryName)}</h1>
         <PieChartComponent countryName={countryName}></PieChartComponent>
-        <button className="removeButton" onClick={removeCountry}>
+        <button
+          className="removeButton"
+          onClick={removeCountry}
+          data-testid="remove-button"
+        >
           Remove
         </button>
       </>
