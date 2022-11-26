@@ -62,7 +62,7 @@ export default function LineGraph({ data, onLegendClick }) {
   const zoom = () => {
     let { refAreaLeft, refAreaRight } = state;
 
-    if (refAreaLeft === refAreaRight || refAreaRight === '') {
+    if (refAreaLeft === refAreaRight || !refAreaRight) {
       setState({
         ...state,
         refAreaLeft: '',
@@ -111,9 +111,11 @@ export default function LineGraph({ data, onLegendClick }) {
 
   return (
     <>
-      <button type="button" className="zoomOutButton" onClick={zoomOut}>
-        Zoom Out
-      </button>
+      {slicedData !== data && (
+        <button type="button" className="zoomOutButton" onClick={zoomOut}>
+          Zoom Out
+        </button>
+      )}
       <ResponsiveContainer width="100%" height="100%" minHeight={400}>
         <LineChart
           onMouseDown={(e) =>
