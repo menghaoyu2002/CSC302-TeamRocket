@@ -7,6 +7,36 @@ from flask import Blueprint, current_app, g, request
 logging_blueprint = Blueprint("logger", __name__)
 
 
+@logging_blueprint.route('/', methods=["POST"])
+def log_client():
+    """Log the message sent by the client"""
+    data = request.get_json()
+
+    try:
+        severity = data['severity']
+        message = data['message']
+    except KeyError:
+        current_app.logger.warning(
+            'missing required parameters: data=' + str(data))
+        return {'message': 'severity and message are required parameters.'}, 400
+
+    message = '[CLIENT] ' + message
+    severity = severity.upper()
+
+    if severity == 'DEBUG':
+        current_app.logger.debug(message)
+    elif severity == 'WARNING':
+        current_app.logger.warning(message)
+    elif severity == 'ERROR':
+        current_app.logger.error(message)
+    elif severity == 'FATAL':
+        current_app.logger.fatal(message)
+    else:
+        current_app.logger.info(message)
+
+    return {'success': 'ok'}, 200
+
+
 @logging_blueprint.before_app_request
 def log_request_start():
     """Start a timer for how long the request takes"""

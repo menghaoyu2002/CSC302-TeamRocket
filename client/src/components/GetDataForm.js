@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { toTitleCase } from '../helpers/helpers';
 import axios from '../axios';
 import '../styles/GetDataForm.css';
+import Logger from '../logger';
 
 export default function GetDataForm({ data, setData, setError }) {
   const [name, setName] = useState('');
@@ -39,8 +40,10 @@ export default function GetDataForm({ data, setData, setError }) {
       .catch((error) => {
         if (error.response) {
           setError(error.response.data.error.msg);
+          Logger.warn(error.response.data.error.msg);
         } else {
           setError(`Something went wrong: ${error}`);
+          Logger.error(`Something went wrong: ${error}`);
         }
       });
   };

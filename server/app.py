@@ -46,7 +46,7 @@ def create_app(test_config=None):
             traceback.format_exc()
         )
 
-    app.register_blueprint(logging_blueprint)
+    app.register_blueprint(logging_blueprint, url_prefix='/logger')
     app.register_blueprint(data_blueprint, url_prefix='/data')
 
     return app
