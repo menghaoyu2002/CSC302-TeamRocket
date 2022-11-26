@@ -72,10 +72,10 @@ sudo docker compose build
 This script runs our docker container, i.e. the application.
 
 ```bash
-su -c 'docker compose up'
+su -c './scripts/run.sh'
 
 # the recommended way if sudo is installed
-sudo docker compose up
+sudo ./scripts/run.sh
 ```
 
 Then navigate to http://localhost:3000 to view the running application.
