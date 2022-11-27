@@ -21,6 +21,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "start-app": "cd .. && docker compose up",
+    "build-app": "cd .. && docker compose build",
     "e2e": "start-server-and-test start-app 'http://localhost:3000|http://localhost:5000/data/names' cypress:run"
   },
   "eslintConfig": {
