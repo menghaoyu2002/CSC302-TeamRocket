@@ -9,6 +9,9 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -17,5 +20,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4.2.1
         with:
-          build: docker compose build
-          start: docker compose up
+          build: cd .. && docker compose build
+          start: cd .. && docker compose up
