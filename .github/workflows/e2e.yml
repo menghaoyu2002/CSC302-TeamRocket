@@ -20,5 +20,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4.2.1
         with:
-          build: cd .. && docker compose build
-          start: cd .. && docker compose up
+          build: docker compose build
+          start: docker compose up
+          project: ./client
