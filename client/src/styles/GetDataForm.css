@@ -37,7 +37,7 @@ label {
   margin-right: 2rem;
   width: 10rem;
   height: 100px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .suggestionsContainer {
