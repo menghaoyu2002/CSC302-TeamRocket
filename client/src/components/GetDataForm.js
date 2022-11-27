@@ -6,8 +6,8 @@ import Logger from '../logger';
 
 export default function GetDataForm({ data, setData, setError }) {
   const [name, setName] = useState('');
-  const [startYear, setStartYear] = useState(new Date().getFullYear());
-  const [endYear, setEndYear] = useState(new Date().getFullYear());
+  const [startYear, setStartYear] = useState();
+  const [endYear, setEndYear] = useState();
   const [countryNames, setCountryNames] = useState([]);
   const [nameSuggestions, setNameSuggestions] = useState([]);
 
@@ -28,9 +28,14 @@ export default function GetDataForm({ data, setData, setError }) {
       return;
     }
 
-    // TODO: change endpoint to getDataByNameAndYearRange
-    await axios
-      .get(`/data/${name}`)
+    let baseurl = `/data/${name}`
+
+    if (startYear && endYear) { // nonempty strings
+      baseurl += `/years?from=${startYear}&to=${endYear}`
+    }
+
+    axios
+      .get(baseurl)
       .then((res) => {
         if (res.status === 200) {
           setData(res.data.data);
