@@ -17,7 +17,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "start-app": "cd .. && docker compose up",
+    "e2e": "start-server-and-test start-app 'http://localhost:3000|http://localhost:5000/data/names' cypress:run"
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +45,9 @@
     "transformIgnorePatterns": [
       "/node_modules/(?!(axios)/)"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^11.2.0",
+    "start-server-and-test": "^1.14.0"
   }
 }
