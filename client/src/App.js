@@ -4,6 +4,7 @@ import GetDataForm from './components/GetDataForm';
 import LineGraph from './components/Graph';
 import PieChartDrawer from './components/PieChartDrawer';
 import { getRandomColor } from './helpers/helpers';
+import Logger from './logger';
 
 function App() {
   const [allData, setAllData] = useState([]);
@@ -11,6 +12,7 @@ function App() {
 
   const setError = (error) => {
     alert(error);
+    Logger.error(error);
   };
 
   /* Updates the all the data for the main graph */
