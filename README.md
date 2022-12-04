@@ -6,6 +6,10 @@
 [![Node.js CI](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/nodejs.yml/badge.svg)](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/nodejs.yml)
 [![Cypress e2e](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/e2e.yml/badge.svg)](https://github.com/menghaoyu2002/CSC302-TeamRocket/actions/workflows/e2e.yml)
 
+## Project Overview
+
+This project is a tool to visualize data from a particular dataset by using a simple web interface. The overall goal for the project is to present the dataset in a way that is easy to digest so that it sparks interest and quetions into the dataset. The particular dataset we have chosen contains data on the percentages of various populations that are considered undernourished, or do not meet the minimum caloric intake defined as necessary for a given population. We presented our data through graphs in a way that you can compare the undernourishments of various populations over time. We believe this makes it easy for anyone to see the vast differences in undernourishment between populations and their changes over time. This subject matters to us because undernourishment is still a real problem throughout the world. The UN has set a Sustainable Development Goal to end hunger by 2030 but we are still far from this goal. Our team wishes to shed light on this issue and spark interest in others too.
+
 ## Documentation
 
 Documentation can be found in our [Github Wiki](https://github.com/menghaoyu2002/CSC302-TeamRocket/wiki)
