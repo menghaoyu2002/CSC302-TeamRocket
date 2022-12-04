@@ -19,15 +19,20 @@ For milestone 2, we had:
  - Michael develop backend data processing
  - Menghao work on tests and front end design/implementation  
 
-For milestone 3, we will have:  
+For milestone 3, we had:  
  - Jeremiah work on data transformations + CI/CD
  - Michael develop web-page UI
  - Menghao develop tests and help develop back end  
 
-For milestone 4, we will have:  
+For milestone 4, had:  
  - Jeremiah creating end to end tests
  - Michael develop interactive UI
  - Menghao develop interactive UI
+
+## Final Features not delivered
+The only feature we were thinking of that was not delivered was some sort of sophisticated regression feature where users could view a regression on the data to interpolate or extrapolate data and predict future data possibilities for undernourishment in various populations. The main reason why this feature was not delivered was because of the time constraints. With the time we had, finding a solution to this problem, learning how to use the correct packages, implementing this feature by making new pages and adding new tests was a bit too much work for the team given our workload. More details can be found in our meeting notes.
+
+## Below is outdated:
 
 ## Features
 In order of higheset priority, future features are described below:  
