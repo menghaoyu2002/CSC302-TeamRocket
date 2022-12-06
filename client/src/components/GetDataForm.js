@@ -28,10 +28,11 @@ export default function GetDataForm({ data, setData, setError }) {
       return;
     }
 
-    let baseurl = `/data/${name}`
+    let baseurl = `/data/${name}`;
 
-    if (startYear && endYear) { // nonempty strings
-      baseurl += `/years?from=${startYear}&to=${endYear}`
+    if (startYear && endYear) {
+      // nonempty strings
+      baseurl += `/years?from=${startYear}&to=${endYear}`;
     }
 
     axios
@@ -72,48 +73,52 @@ export default function GetDataForm({ data, setData, setError }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
-      <div>
-        <label htmlFor="name">Country Name:</label>
-        <div className="suggestionsContainer">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            required={true}
-            onChange={handleNameChange}
-            value={name}
-            placeholder="start typing a name..."
-            data-testid="name"
-          />
-          <ul className="suggestions">{nameSuggestions}</ul>
+    <div className="formWrapper">
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <div>
+          <label htmlFor="name">Country Name:</label>
+          <div className="suggestionsContainer">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required={true}
+              onChange={handleNameChange}
+              value={name}
+              placeholder="start typing a name..."
+              data-testid="name"
+            />
+            {name.length !== 0 && (
+              <ul className="suggestions">{nameSuggestions}</ul>
+            )}
+          </div>
         </div>
-      </div>
-      <div>
-        <label htmlFor="start-year">Start Year: </label>
+        <div>
+          <label htmlFor="start-year">Start Year: </label>
+          <input
+            type="number"
+            name="start-year"
+            id="start-year"
+            onChange={(e) => setStartYear(parseInt(e.target.value))}
+            data-testid="start-year"
+          />
+        </div>
+        <div>
+          <label htmlFor="end-year">End Year: </label>
+          <input
+            type="number"
+            name="end-year"
+            id="end-year"
+            onChange={(e) => setEndYear(parseInt(e.target.value))}
+            data-testid="end-year"
+          />
+        </div>
         <input
-          type="number"
-          name="start-year"
-          id="start-year"
-          onChange={(e) => setStartYear(parseInt(e.target.value))}
-          data-testid="start-year"
-        />
-      </div>
-      <div>
-        <label htmlFor="end-year">End Year: </label>
-        <input
-          type="number"
-          name="end-year"
-          id="end-year"
-          onChange={(e) => setEndYear(parseInt(e.target.value))}
-          data-testid="end-year"
-        />
-      </div>
-      <input
-        type="submit"
-        value="Add Country"
-        data-testid="add-country"
-      ></input>
-    </form>
+          type="submit"
+          value="Add Country"
+          data-testid="add-country"
+        ></input>
+      </form>
+    </div>
   );
 }

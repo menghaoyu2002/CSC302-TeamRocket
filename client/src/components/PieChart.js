@@ -38,7 +38,13 @@ export default function PieChartComponent({ countryName }) {
       });
   }, [countryName]);
   return (
-    <div>
+    <div
+      style={{
+        width: '100vw',
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <PieChart width={730} style={style} height={250}>
         <Pie
           data={data}
