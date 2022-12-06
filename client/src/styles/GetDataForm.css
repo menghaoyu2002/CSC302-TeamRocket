@@ -24,6 +24,8 @@ form {
   padding-top: 2rem;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  width: 100%;
 }
 
 label {
@@ -42,9 +44,7 @@ label {
 
 .suggestionsContainer {
   display: inline-flex;
-  align-items: center;
   flex-direction: column;
-  justify-content: center;
 }
 
 .suggestion {
@@ -58,12 +58,22 @@ label {
   border-radius: 5px 5px;
 }
 
-input[type='text'] {
-  position: relative;
-}
-
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1205px) {
   input[type='submit'] {
     margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+  }
+
+  form label {
+    display: block;
   }
 }
