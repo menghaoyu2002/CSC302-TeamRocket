@@ -4,7 +4,23 @@ services:
     build: ./server
     ports:
       - '5000:5000'
+
   client:
-    build: ./client
+    build:
+      context: ./client
+      args:
+        - BACKEND_URL=http://server:5000
     ports:
       - '3000:3000'
+
+  cypress:
+    image: cypress/included:11.2.0
+    volumes:
+      - ./client/cypress:/cypress
+      - ./client/cypress.config.js:/cypress.config.js
+    environment:
+      - CYPRESS_BASE_URL=http://client:3000
+      - CYPRESS_BACKEND_URL=http://server:5000
+    depends_on:
+      - client
+      - server
