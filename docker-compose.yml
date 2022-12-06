@@ -4,7 +4,11 @@ services:
     build: ./server
     ports:
       - '5000:5000'
+
   client:
-    build: ./client
+    build:
+      context: ./client
+      args:
+        - BACKEND_URL=http://localhost:5000
     ports:
       - '3000:3000'

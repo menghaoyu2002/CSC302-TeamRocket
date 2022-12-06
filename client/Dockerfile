@@ -8,6 +8,9 @@ COPY package-lock.json .
 RUN npm ci
 RUN npm install -g serve
 
+ARG BACKEND_URL
+ENV REACT_APP_BACKEND_URL $BACKEND_URL
+
 COPY . .
 RUN npm run build
 
