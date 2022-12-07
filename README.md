@@ -94,3 +94,29 @@ su -c './scripts/test.sh'
 # the recommended way if sudo is installed
 sudo ./scripts/test.sh
 ```
+
+# Validation, Verification, and Acceptance Criteria
+
+## Acceptance Criteria
+
+Our acceptance creteria is defined under each milestone [here](https://github.com/menghaoyu2002/CSC302-TeamRocket/blob/main/ROADMAP.md).
+
+## Validation and Verification
+
+#### Milestone 1: Set up repository, dev environments, and initial files. Project can build, run and connect to the database.
+
+The acceptance criteria was validated through unit tests in the backend with pytest. It was continuously validated with our Github Actions CI/CD pipeline, which runs these unit tests and verfies if the build is successfully on every change to the codebase.
+
+Checking whether or not our program can be installed, built, run, and tested on a linux machine was validated manually before every deliverable.
+
+#### Milestone 2: Able to import data into the database on server and get data with a basic interface.
+
+All database criteria was verified with unit tests in the backend. Data fetching with a basic interface was verified with unit tests and manually validated through running and interacting with the application. These new unit tests are ran on every change to continuously validate that our applicatoin is working as we intended it to.
+
+#### Milestone 3: Able to perform transformations/calculations on the data and display them upon user request with a simple web-page.
+
+All backend transformatoins and calculations on the data were verified with unit tests in the backend. Each transformation is a tested endpoint in our backend. The rendering of the web page was unit tested with jest and verified manually. All unit tests once again were run by our CI/CD and validated with manual testing.
+
+#### Milestone 4: Make the web-page interactive, allowing the user to see data transformations as they adjust values on the page.
+
+Starting from milestone 4, all user interaction tests were simulated with an end to end testing framework (cypress). This means that the usability of our application was continously verfied by end to end tests instead of manually. These tests verify that our web page is in fact interative, that it does in fact retrieve the data, and that the data is displayed in a visual manner, and thus have validating that we have met the acceptance criteria of the milestone. These tests were integrated with our CI/CD pipeline.
